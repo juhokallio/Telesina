@@ -15,7 +15,7 @@ public class Fold implements TelesinaGameAction {
 
 	@Override
 	public void solve(Situation situation, Solution solution) {
-		situation.removePlayer(situation.getActivePlayersNumber());
+		situation.removeActivePlayer();
 	}
 	
 	

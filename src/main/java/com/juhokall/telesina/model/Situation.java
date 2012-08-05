@@ -4,41 +4,71 @@
  */
 package com.juhokall.telesina.model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
  * @author juho
  */
 public class Situation {
-List<Player> players;
-int street;
-int potSize;
-List<Integer> playersLeft;
-int activePlayersNumber;
 
-	public List<Player> getPlayers() {
-		return players;
+	Map<Integer, Player> players;
+	List<Integer> playerIds;
+	int street;
+	int potSize;
+	int activePlayerId;	
+	Player activePlayer;
+
+	public Situation(int playersCount) {
+	
+		players = new HashMap<Integer, Player>();
+		playerIds = new ArrayList<Integer>();
+		for (int i = 0; i < playersCount; i++) {
+			players.put(i, new Player());
+			playerIds.add(i);
+			System.out.println("pelaaja " + i);
+		}
+	}
+	
+
+	public Player getPlayer(int playerId) {
+		return players.get(playerId);
 	}
 
-	public void setPlayers(List<Player> players) {
-		this.players = players;
+	public List<Integer> getPlayerIds() {
+		return playerIds;
 	}
 
-	public int getActivePlayersNumber() {
-		return activePlayersNumber;
+	public int getActivePlayerId() {
+		return activePlayerId;
 	}
 
-	public void setActivePlayersNumber(int activePlayersNumber) {
-		this.activePlayersNumber = activePlayersNumber;
+	
+
+	public Player getActivePlayer() {
+		return activePlayer;
+	}
+
+	public void setActivePlayer(int activePlayerId) {
+		this.activePlayer = players.get(activePlayerId);
 	}
 
 	public void removePlayer(int playerNumber) {
 		players.remove(playerNumber);
+		playerIds.remove(playerNumber);
 	}
-public void addToPot(int amount) {
-	potSize += amount;
-}
+
+	public void removeActivePlayer() {
+		players.remove(activePlayerId);
+	}
+
+	public void addToPot(int amount) {
+		potSize += amount;
+	}
+
 	public int getPotSize() {
 		return potSize;
 	}
@@ -47,16 +77,6 @@ public void addToPot(int amount) {
 		this.potSize = potSize;
 	}
 
-	public List<Integer> getPlayersLeft() {
-		return playersLeft;
-	}
-
-	public void setPlayersLeft(List<Integer> playersLeft) {
-		this.playersLeft = playersLeft;
-	}
-
-
-
 	public int getStreet() {
 		return street;
 	}
@@ -64,5 +84,4 @@ public void addToPot(int amount) {
 	public void setStreet(int street) {
 		this.street = street;
 	}
-
 }

@@ -16,8 +16,7 @@ public class Bet implements TelesinaGameAction {
 
 	@Override
 	public void solve(Situation situation, Solution solution) {
-				int playerNumber = situation.getActivePlayersNumber();
-		Player player = situation.getPlayers().get(playerNumber);
+		Player player = situation.getActivePlayer();
 		int betSize = solution.getSolutionSize();
 		player.removeFromStack(betSize);
 		situation.addToPot(betSize);

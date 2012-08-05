@@ -4,17 +4,21 @@
  */
 package com.juhokall.telesina.game;
 
+import com.google.inject.ImplementedBy;
 import com.juhokall.telesina.model.Situation;
 import com.juhokall.telesina.model.Solution;
+import java.util.Set;
 
 /**
  *
  * @author juho
  */
+@ImplementedBy(TelesinaGameImpl.class)
 public interface TelesinaGame {
 
-	public void dealNewCards();
 	public void dealCardForPlayer(int card, int playerNumber);
 	public Situation solveSituation(Solution solution);
 	public Situation getSituation();
+	public void setNewGame(int numberOfPlayers);
+	public Set getDeck();
 }

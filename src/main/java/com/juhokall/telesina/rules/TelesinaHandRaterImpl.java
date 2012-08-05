@@ -15,9 +15,9 @@ public class TelesinaHandRaterImpl implements TelesinaHandRater {
 	public int getHighcardValue(int card) {
 		int suit = getSuit(card);
 		int rank = getRank(card);
-		int firstOne = suit;//Telesina.SUIT_COUNT - suit - 1;
+		int firstOne = suit;
 		int value = firstOne + rank * (Telesina.SUIT_COUNT);
-		return value;//card - suit * Telesina.RANK_COUNT;
+		return value;
 	}
 
 	public int getPairhandValue(int[] hand) {
@@ -67,7 +67,6 @@ public class TelesinaHandRaterImpl implements TelesinaHandRater {
 	private int getSetValue(int rank, int originalValue) {
 		int value = 0;
 		
-
 		return value;
 	}
 	private int getSquadsValue(int rank) {
