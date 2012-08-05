@@ -11,7 +11,7 @@ package com.juhokall.telesina.model;
 public class Telesina {
 	public static final int HAND_LENGTH = 6;
 	public static final int DECK_LENGTH = 32;
-	public static final String[] SUITS = {"Hearts", "Diamonds", "Clubs", "Spades"};
+	public static final String[] SUITS = {"Spades", "Clubs", "Diamonds", "Hearts" };
 	public static final String[] RANKS = {"seven", "eight", "nine", "ten", "Jack", "Queen", "King", "Ace"};
 	public static final int RANK_COUNT = 8;
 	public static final int SUIT_COUNT = 4;

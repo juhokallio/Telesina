@@ -15,7 +15,7 @@ public class TelesinaHandRaterImpl implements TelesinaHandRater {
 	public int getHighcardValue(int card) {
 		int suit = getSuit(card);
 		int rank = getRank(card);
-		int firstOne = Telesina.SUIT_COUNT - suit - 1;
+		int firstOne = suit;//Telesina.SUIT_COUNT - suit - 1;
 		int value = firstOne + rank * (Telesina.SUIT_COUNT);
 		return value;//card - suit * Telesina.RANK_COUNT;
 	}
@@ -27,8 +27,11 @@ public class TelesinaHandRaterImpl implements TelesinaHandRater {
 			int rank = getRank(card);
 			hits[rank]++;
 			if (hits[rank] == 2) {
+				value = getPairValue(rank, value);
 			} else if (hits[rank] == 3) {
+				value = getSetValue(rank, value);
 			} else if (hits[rank] == 4) {
+				value = getSquadsValue(rank);
 			}
 		}
 		return value;
@@ -47,10 +50,35 @@ public class TelesinaHandRaterImpl implements TelesinaHandRater {
 				value += Telesina.RANK_COUNT * otherPairRank + rank;
 			}
 		} else {
+			int originalTwoPairValue = originalValue - Telesina.TWO_PAIR_VALUE;
+			int originalWeakerPair = originalTwoPairValue % Telesina.RANK_COUNT;
+			int originalStrongerPair = originalTwoPairValue / Telesina.RANK_COUNT;
+			if(rank > originalWeakerPair){
+				if(rank < originalStrongerPair){
+					value = Telesina.TWO_PAIR_VALUE + originalStrongerPair * Telesina.RANK_COUNT + rank; 
+				}else {
+					value = Telesina.TWO_PAIR_VALUE + rank * Telesina.RANK_COUNT + originalStrongerPair;
+				}
+			}
 		}
 		return value;
 	}
 
+	private int getSetValue(int rank, int originalValue) {
+		int value = 0;
+		
+
+		return value;
+	}
+	private int getSquadsValue(int rank) {
+		int value = 0;
+		
+
+		return value;
+	}
+
+	
+	
 	private int getSuit(int card) {
 		return card / Telesina.RANK_COUNT;
 	}

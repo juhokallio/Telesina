@@ -24,10 +24,10 @@ public interface TelesinaRules {
  * Number n (0-31) represents a card.
  * 
  * n / 8 gives the suit:
- *  0: Hearts
- *  1: Diamonds
- *  2: Clubs
- *  3: Spades
+ *  3: Hearts
+ *  2: Diamonds
+ *  1: Clubs
+ *  0: Spades
  * 
  * n % 8 gives the rank:
  *  0: seven

@@ -27,28 +27,53 @@ public class TelesinaHandRaterTest extends TelesinaHandRaterImpl {
 
 	@Test
 	public void highcardTest1() {
-		Assert.assertEquals(3, handRater.getHighcardValue(0));
+		Assert.assertEquals(0, handRater.getHighcardValue(0));
 	}
 
 @Test
 	public void highcardTest2() {
-		Assert.assertEquals(7, handRater.getHighcardValue(1));
+		Assert.assertEquals(4, handRater.getHighcardValue(1));
 	}
 	@Test
 	public void highcardTest3() {
-		Assert.assertEquals(2, handRater.getHighcardValue(8));
+		Assert.assertEquals(1, handRater.getHighcardValue(8));
 	}
 	@Test
 	public void highcardTest4() {
-		Assert.assertEquals(6, handRater.getHighcardValue(9));
+		Assert.assertEquals(5, handRater.getHighcardValue(9));
 	}
 	@Test
 	public void highcardTest5() {
-		Assert.assertEquals(0, handRater.getHighcardValue(24));
+		Assert.assertEquals(3, handRater.getHighcardValue(24));
 	}
 	@Test
 	public void highcardTest6() {
-		Assert.assertEquals(1, handRater.getHighcardValue(16));
+		Assert.assertEquals(2, handRater.getHighcardValue(16));
 }
+	@Test
+	public void pairTest1() {
+		int[] hand = {0, 1};
+		Assert.assertEquals(0, handRater.getPairhandValue(hand));
+}
+	@Test
+	public void pairTest2() {
+		int[] hand1 = {0, 8};
+		int[] hand2 = {1, 9};
+		Assert.assertTrue(handRater.getPairhandValue(hand1) < handRater.getPairhandValue(hand2));
+}
+	@Test
+	public void twoPairTest1() {
+		int[] hand1 = {0, 8, 1, 9};
+		int[] hand2 = {2, 10};
+		Assert.assertTrue(handRater.getPairhandValue(hand1) > handRater.getPairhandValue(hand2));
+}
+	@Test
+	public void twoPairTest2() {
+		int[] hand1 = {0, 8, 3, 11};
+		int[] hand2 = {1, 9, 2, 10};
+		Assert.assertTrue(handRater.getPairhandValue(hand1) > handRater.getPairhandValue(hand2));
+}
+	
+	
 	
 }
