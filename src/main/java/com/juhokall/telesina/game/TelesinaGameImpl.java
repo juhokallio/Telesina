@@ -4,6 +4,7 @@
  */
 package com.juhokall.telesina.game;
 
+import com.google.inject.Inject;
 import com.juhokall.telesina.game.action.Bet;
 import com.juhokall.telesina.game.action.Call;
 import com.juhokall.telesina.game.action.Check;
@@ -30,22 +31,11 @@ public class TelesinaGameImpl implements TelesinaGame {
 
 	private Situation situation;
 	private Set deck;
-	private Map<SolutionType, TelesinaGameAction> solutionMethods;
-
-	public TelesinaGameImpl() {
-
-		solutionMethods = new EnumMap<SolutionType, TelesinaGameAction>(SolutionType.class);
-		solutionMethods.put(SolutionType.BET, new Bet());
-		solutionMethods.put(SolutionType.CALL, new Call());
-		solutionMethods.put(SolutionType.CHECK, new Check());
-		solutionMethods.put(SolutionType.FOLD, new Fold());
-		solutionMethods.put(SolutionType.RAISE, new Raise());
-	}
+	@Inject
+	private TelesinaGameAction action;
 
 	@Override
 	public Situation solveSituation(Solution solution) {
-		SolutionType type = solution.getSolutionType();
-		TelesinaGameAction action = solutionMethods.get(type);
 		action.solve(situation, solution);
 		return situation;
 	}

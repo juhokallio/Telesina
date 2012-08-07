@@ -10,14 +10,14 @@ import com.juhokall.telesina.model.Telesina;
  *
  * @author juho
  */
-public class TextualHumanizer implements Humanizer{
+public class TextualHumanizer implements TelesinaHumanizer{
 
 	@Override
 	public String humanizeCard(int card) {
 		String returned;
 		if(card >= 0 && card < Telesina.DECK_LENGTH) {
-			int suit = card / Telesina.SUIT_COUNT;
-			int rank = card / Telesina.RANK_COUNT;
+			int suit = card / Telesina.RANK_COUNT;
+			int rank = card / Telesina.SUIT_COUNT;
 			returned = Telesina.RANKS_SHORT[rank] + Telesina.SUITS_SHORT[suit];
 		} else {
 			returned = "NN";
@@ -27,7 +27,7 @@ public class TextualHumanizer implements Humanizer{
 	}
 
 	@Override
-	public int dehumanizeCard(Object card) {
+	public int dehumanizeCard(String card) {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 	

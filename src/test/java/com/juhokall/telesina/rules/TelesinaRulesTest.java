@@ -12,7 +12,7 @@ import org.junit.Test;
  *
  * @author juho
  */
-public class TelesinaTest {
+public class TelesinaRulesTest {
     @Inject
     private TelesinaRules rules;
 //    @Test

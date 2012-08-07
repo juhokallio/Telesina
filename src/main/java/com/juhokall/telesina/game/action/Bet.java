@@ -7,6 +7,7 @@ package com.juhokall.telesina.game.action;
 import com.juhokall.telesina.model.Player;
 import com.juhokall.telesina.model.Situation;
 import com.juhokall.telesina.model.Solution;
+import com.juhokall.telesina.model.Telesina;
 
 /**
  *
@@ -15,11 +16,15 @@ import com.juhokall.telesina.model.Solution;
 public class Bet implements TelesinaGameAction {
 
 	@Override
-	public void solve(Situation situation, Solution solution) {
-		Player player = situation.getActivePlayer();
+	public Boolean solve(Situation situation, Solution solution) {
 		int betSize = solution.getSolutionSize();
-		player.removeFromStack(betSize);
-		situation.addToPot(betSize);
+		if (betSize >= Telesina.DEFAULT_ANTE && betSize <= situation.getPotSize()) {
+			Player player = situation.getActivePlayer();
+			player.removeFromStack(betSize);
+			situation.addToPot(betSize);
+			return true;
+		} else {
+			return false;
+		}
 	}
-	
 }

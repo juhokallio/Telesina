@@ -22,4 +22,6 @@ public class Telesina {
 	public static int STREET_COUNT = 4;
 	public static int NORMAL_STREET_COUNT = 3;
 	public static int[] CARDS_DEALT_ON_STREET = {2, 1, 1};
+	public static int DEFAULT_STACK = 100;
+	public static int DEFAULT_ANTE = 1;
 }

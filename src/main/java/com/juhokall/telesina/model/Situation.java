@@ -15,24 +15,39 @@ import java.util.Map;
  */
 public class Situation {
 
-	Map<Integer, Player> players;
-	List<Integer> playerIds;
-	int street;
-	int potSize;
-	int activePlayerId;	
-	Player activePlayer;
+	private Map<Integer, Player> players;
+	private List<Integer> playerIds;
+	private int street;
+	private int potSize;
+	private int activePlayerId;
+	private int playerCount;
+	private Player activePlayer;
 
-	public Situation(int playersCount) {
-	
+	public Situation(int playerCount, int stackSizes) {
+		Player temp;
+
 		players = new HashMap<Integer, Player>();
 		playerIds = new ArrayList<Integer>();
-		for (int i = 0; i < playersCount; i++) {
-			players.put(i, new Player());
+		for (int i = 0; i < playerCount; i++) {
+			temp = new Player();
+			temp.setStack(stackSizes);
+			players.put(i, temp);
 			playerIds.add(i);
-			System.out.println("pelaaja " + i);
 		}
+		this.playerCount = playerCount;
+		activePlayer = players.get(0);
+		activePlayerId = 0;
+		potSize = playerCount * Telesina.DEFAULT_ANTE;
+		street = 0;
 	}
-	
+
+	public Situation(int playersCount) {
+		this(playersCount, Telesina.DEFAULT_STACK);
+	}
+
+	public int getPlayerCount() {
+		return playerCount;
+	}
 
 	public Player getPlayer(int playerId) {
 		return players.get(playerId);
@@ -45,8 +60,6 @@ public class Situation {
 	public int getActivePlayerId() {
 		return activePlayerId;
 	}
-
-	
 
 	public Player getActivePlayer() {
 		return activePlayer;
@@ -63,6 +76,8 @@ public class Situation {
 
 	public void removeActivePlayer() {
 		players.remove(activePlayerId);
+		playerCount--;
+		playerIds.remove(activePlayerId);
 	}
 
 	public void addToPot(int amount) {

@@ -21,7 +21,7 @@ public class TelesinaAIImpl implements TelesinaAI {
 
 	@Override
 	public Solution getSolution(Situation situation) {
-		Solution solution = new Solution();
+		Solution solution = null;
 		if (situation.getStreet() == 0) {
 			solution = preflopAI.getSolution(situation);
 		} else {

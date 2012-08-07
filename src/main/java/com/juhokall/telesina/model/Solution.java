@@ -13,6 +13,17 @@ public class Solution {
 	private SolutionType solutionType;
 	private int solutionSize;
 
+
+	public Solution(SolutionType solutionType, int solutionSize) {
+		this.solutionType = solutionType;
+		this.solutionSize = solutionSize;
+	}
+
+	public Solution(SolutionType solutionType) {
+		this(solutionType, 0);
+	}
+	
+
 	public HandRange getRange() {
 		return range;
 	}

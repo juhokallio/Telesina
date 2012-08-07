@@ -14,7 +14,7 @@ import com.juhokall.telesina.model.Solution;
 public class Raise implements TelesinaGameAction {
 
 	@Override
-	public void solve(Situation situation, Solution solution) {
+	public Boolean solve(Situation situation, Solution solution) {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 	

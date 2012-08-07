@@ -19,20 +19,41 @@ public class Player {
 	private int number;
 	private PlayerType playerType;
 
+	public Player(int stack) {
+		id = 0l;
+		playerType = PlayerType.VILLAIN;
+		number = 0;
+
+		hand = new TelesinaHand();
+		this.stack = stack;
+	}
+
+	public Player() {
+		this(Telesina.DEFAULT_STACK);
+	}
+
 	public int getNumber() {
 		return number;
 	}
-
 	public void setNumber(int number) {
 		this.number = number;
 	}
-public void removeFromStack(int amount) {
-	
-	stack -= amount;
-}
-public void addToStack (int amount){
-	stack += amount;		
-}
+
+	public int removeFromStack(int amount) {
+		int toBeTaken;
+		if (stack >= amount) {
+			toBeTaken = amount;
+		} else {
+			toBeTaken = stack;
+		}
+		stack -= toBeTaken;
+		return toBeTaken;
+	}
+
+	public void addToStack(int amount) {
+		stack += amount;
+	}
+
 	public PlayerType getPlayerType() {
 		return playerType;
 	}
@@ -41,18 +62,12 @@ public void addToStack (int amount){
 		this.playerType = playerType;
 	}
 
-	
-
 	public Solution getLastSolution() {
 		return lastSolution;
 	}
 
 	public void setLastSolution(Solution lastSolution) {
 		this.lastSolution = lastSolution;
-	}
-
-	public Player() {
-		hand = new TelesinaHand(); 
 	}
 
 	public Boolean getTurnLeft() {

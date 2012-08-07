@@ -14,8 +14,8 @@ import com.juhokall.telesina.model.Solution;
 public class Check implements TelesinaGameAction{
 
 	@Override
-	public void solve(Situation situation, Solution solution) {
-		
+	public Boolean solve(Situation situation, Solution solution) {
+		return true;
 	}
 	
 }

@@ -14,9 +14,11 @@ import com.juhokall.telesina.model.Solution;
 public class Call implements TelesinaGameAction {
 
 	@Override
-	public void solve(Situation situation, Solution solution) {
+	public Boolean solve(Situation situation, Solution solution) {
 		int betSize = solution.getSolutionSize();
-		situation.addToPot(betSize);
+		int takenFromStack = situation.getActivePlayer().removeFromStack(betSize);
+		situation.addToPot(takenFromStack);
+		return true;
 	}
 	
 }
