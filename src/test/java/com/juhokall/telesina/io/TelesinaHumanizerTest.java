@@ -43,6 +43,11 @@ public class TelesinaHumanizerTest {
 		Assert.assertEquals("NN", humanizedCard);	
 	}
 	
-	
+	@Test
+	public void TelesinaHumanizerTest4() {
+		int card = -32;
+		String humanizedCard = humanizer.humanizeCard(card);
+		Assert.assertEquals("NN", humanizedCard);	
+	}
 
 }

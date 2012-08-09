@@ -73,7 +73,24 @@ public class TelesinaHandRaterTest extends TelesinaHandRaterImpl {
 		int[] hand2 = {1, 9, 2, 10};
 		Assert.assertTrue(handRater.getPairhandValue(hand1) > handRater.getPairhandValue(hand2));
 }
-	
+	@Test
+	public void twoPairTest3() {
+		int[] hand1 = {0, 8, 3, 11, 4, 12};
+		int[] hand2 = {1, 9, 2, 10, 5, 13};
+		Assert.assertTrue(handRater.getPairhandValue(hand1) < handRater.getPairhandValue(hand2));
+}
+	@Test
+	public void twoPairTest4() {
+		int[] hand1 = {0, 8, 4, 12, 3, 11};
+		int[] hand2 = {1, 9, 2, 10, 5, 13};
+		Assert.assertTrue(handRater.getPairhandValue(hand1) < handRater.getPairhandValue(hand2));
+}
+	@Test
+	public void twoPairTest5() {
+		int[] hand1 = {3, 11, 0, 8, 4, 12};
+		int[] hand2 = {1, 9, 2, 10, 5, 13};
+		Assert.assertTrue(handRater.getPairhandValue(hand1) < handRater.getPairhandValue(hand2));
+}
 	
 	
 }
