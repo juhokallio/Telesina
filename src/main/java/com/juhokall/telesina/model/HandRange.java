@@ -4,14 +4,17 @@
  */
 package com.juhokall.telesina.model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author juho
  */
 public class HandRange {
 private final static int ORIGINAL_WEIGHT = 100;	
+	private ArrayList<TelesinaValuedCard> handValues;
 	private int[] range;
-
+	
 	public HandRange() {
 		range = new int[Telesina.DECK_LENGTH];
 		for(int i = 0; i < Telesina.DECK_LENGTH; i++) {
@@ -29,5 +32,13 @@ private final static int ORIGINAL_WEIGHT = 100;
 	
 	public void removeFromRange (int card) {
 		range[card] = 0;
+	}
+
+	public ArrayList<TelesinaValuedCard> getHandValues() {
+		return handValues;
+	}
+	
+	public void addValuedCard (TelesinaValuedCard valuedCard){
+		handValues.add(valuedCard);
 	}
 }
