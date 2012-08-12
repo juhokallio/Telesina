@@ -5,6 +5,7 @@
 package com.juhokall.telesina.rules;
 
 import com.google.inject.ImplementedBy;
+import com.juhokall.telesina.model.TelesinaHand;
 
 /**
  *
@@ -15,4 +16,5 @@ public interface TelesinaHandRater {
 	
 	public int getHighcardValue(int card);
 	public int getPairhandValue(int[] hand);
+	public int getTelesinaHandValue(TelesinaHand hand);
 }

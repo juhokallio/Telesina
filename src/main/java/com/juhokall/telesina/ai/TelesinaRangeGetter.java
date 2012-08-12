@@ -4,10 +4,13 @@
  */
 package com.juhokall.telesina.ai;
 
+import com.juhokall.telesina.model.HandRange;
+import com.juhokall.telesina.model.Situation;
+
 /**
  *
  * @author juho
  */
 public interface TelesinaRangeGetter {
-	
+	public HandRange getRange(Situation situation);
 }

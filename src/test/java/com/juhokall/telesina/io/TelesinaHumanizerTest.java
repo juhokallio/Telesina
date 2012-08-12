@@ -49,5 +49,11 @@ public class TelesinaHumanizerTest {
 		String humanizedCard = humanizer.humanizeCard(card);
 		Assert.assertEquals("NN", humanizedCard);	
 	}
+	@Test
+	public void TelesinaHumanizerTest5() {
+		int card = 1;
+		String humanizedCard = humanizer.humanizeCard(card);
+		Assert.assertEquals("8S", humanizedCard);	
+	}
 
 }

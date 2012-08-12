@@ -17,7 +17,7 @@ public class TextualHumanizer implements TelesinaHumanizer{
 		String returned;
 		if(card >= 0 && card < Telesina.DECK_LENGTH) {
 			int suit = card / Telesina.RANK_COUNT;
-			int rank = card / Telesina.SUIT_COUNT;
+			int rank = card % Telesina.RANK_COUNT;
 			returned = Telesina.RANKS_SHORT[rank] + Telesina.SUITS_SHORT[suit];
 		} else {
 			returned = "NN";

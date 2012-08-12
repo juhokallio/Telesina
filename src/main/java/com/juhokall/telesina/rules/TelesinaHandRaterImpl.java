@@ -4,13 +4,29 @@
  */
 package com.juhokall.telesina.rules;
 
+import com.juhokall.telesina.io.TelesinaHumanizer;
+import com.juhokall.telesina.io.TextualHumanizer;
 import com.juhokall.telesina.model.Telesina;
+import com.juhokall.telesina.model.TelesinaHand;
 
 /**
  *
  * @author juho
  */
 public class TelesinaHandRaterImpl implements TelesinaHandRater {
+
+	@Override
+	public int getTelesinaHandValue(TelesinaHand hand) {
+		int value = 0;
+		value += getPairhandValue(hand.getCards());
+		System.out.println("Hand's size: " + hand.getCards().length);
+		TelesinaHumanizer humanizer = new TextualHumanizer(); 
+		for(int card : hand.getCards()) {
+			System.out.println(humanizer.humanizeCard(card));
+		}
+		return value;
+	}
+	
 
 	public int getHighcardValue(int card) {
 		int suit = getSuit(card);

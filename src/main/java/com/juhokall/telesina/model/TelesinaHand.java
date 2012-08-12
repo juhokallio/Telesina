@@ -9,11 +9,30 @@ package com.juhokall.telesina.model;
  * @author juho
  */
 public class TelesinaHand {
-private int[] cards;
-private int numberOfCardsDealt;
+
+	private int[] cards;
+	private int numberOfCardsDealt;
 
 	public TelesinaHand() {
 		cards = new int[Telesina.HAND_LENGTH];
+	}
+
+	public TelesinaHand(int[] cards) {
+		this();
+		int inputSize = cards.length;
+		if (inputSize <= Telesina.HAND_LENGTH) {
+			for(int i = 0; i < inputSize; i++) {
+				this.cards[i] = cards[i]; 
+			}
+			numberOfCardsDealt = inputSize;
+		} else {
+			System.out.println("Too long hand.");
+		}
+	}
+
+	public TelesinaHand(int[] cards, int handLength) {
+		this.cards = cards;
+		numberOfCardsDealt = handLength;
 	}
 
 	public int[] getCards() {
@@ -31,11 +50,11 @@ private int numberOfCardsDealt;
 	public void setNumberOfCardsDealt(int numberOfCardsDealt) {
 		this.numberOfCardsDealt = numberOfCardsDealt;
 	}
+
 	public void addNewCard(int card) {
-		if(numberOfCardsDealt < Telesina.HAND_LENGTH) {
+		if (numberOfCardsDealt < Telesina.HAND_LENGTH) {
 			cards[numberOfCardsDealt] = card;
 			numberOfCardsDealt++;
 		}
 	}
-
 }

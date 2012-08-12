@@ -7,6 +7,7 @@ package com.juhokall.telesina.rules;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.juhokall.telesina.model.TelesinaHand;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +16,7 @@ import org.junit.Test;
  *
  * @author juho
  */
-public class TelesinaHandRaterTest extends TelesinaHandRaterImpl {
+public class TelesinaHandRaterTest {
 
 	TelesinaHandRater handRater;
 
@@ -90,6 +91,14 @@ public class TelesinaHandRaterTest extends TelesinaHandRaterImpl {
 		int[] hand1 = {3, 11, 0, 8, 4, 12};
 		int[] hand2 = {1, 9, 2, 10, 5, 13};
 		Assert.assertTrue(handRater.getPairhandValue(hand1) < handRater.getPairhandValue(hand2));
+}
+	@Test
+	public void TelesinaHandTest1() {
+		int[] hand1 = {3, 11, 0, 8, 4, 12};
+		TelesinaHand teleHand1 = new TelesinaHand(hand1); 
+		int[] hand2 = {1, 9, 2, 10, 5, 13};
+		TelesinaHand teleHand2 = new TelesinaHand(hand2); 
+		Assert.assertTrue(handRater.getTelesinaHandValue(teleHand1) < handRater.getTelesinaHandValue(teleHand2));
 }
 	
 	

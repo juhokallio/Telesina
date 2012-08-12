@@ -6,19 +6,19 @@ package com.juhokall.telesina.ai;
 
 import com.juhokall.telesina.model.HandRange;
 import com.juhokall.telesina.model.Situation;
-import java.util.Map;
 
 /**
  *
  * @author juho
  */
-public class TelesinaRangeAnalyzerImpl implements TelesinaRangeAnalyzer{
+public class TelesinaRangeGetterImpl implements TelesinaRangeGetter {
 
 	@Override
-	public HandRange[] getRanges(Situation situation) {
-			Map players = situation.getPlayers();
-		
-		throw new UnsupportedOperationException("Not supported yet.");
+	public HandRange getRange(Situation situation) {
+		HandRange range = new HandRange();
+		situation.
+
+		return range;
 	}
 	
 }

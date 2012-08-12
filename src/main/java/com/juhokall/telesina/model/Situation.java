@@ -45,6 +45,10 @@ public class Situation {
 		this(playersCount, Telesina.DEFAULT_STACK);
 	}
 
+	public Map<Integer, Player> getPlayers() {
+		return players;
+	}
+
 	public int getPlayerCount() {
 		return playerCount;
 	}
