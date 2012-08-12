@@ -15,6 +15,7 @@ import com.juhokall.telesina.model.TelesinaValuedCard;
 @ImplementedBy(HandSimulatorImpl.class)
 public interface HandSimulator{
 	public TelesinaValuedCard getValuedCard(TelesinaHand hand);
+	public TelesinaValuedCard getValuedCard(TelesinaHand hand, int nextCard);
 	public void addPlayedCard(int card);
 	public void addPlayedHand(TelesinaHand hand);
 }

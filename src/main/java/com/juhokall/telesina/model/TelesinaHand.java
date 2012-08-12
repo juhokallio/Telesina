@@ -17,12 +17,16 @@ public class TelesinaHand {
 		cards = new int[Telesina.HAND_LENGTH];
 	}
 
+	public TelesinaHand(TelesinaHand source) {
+		this(source.cards, source.numberOfCardsDealt);
+	}
+
 	public TelesinaHand(int[] cards) {
 		this();
 		int inputSize = cards.length;
 		if (inputSize <= Telesina.HAND_LENGTH) {
-			for(int i = 0; i < inputSize; i++) {
-				this.cards[i] = cards[i]; 
+			for (int i = 0; i < inputSize; i++) {
+				this.cards[i] = cards[i];
 			}
 			numberOfCardsDealt = inputSize;
 		} else {

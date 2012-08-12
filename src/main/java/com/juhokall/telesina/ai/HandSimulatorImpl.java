@@ -9,7 +9,6 @@ import com.juhokall.telesina.model.Telesina;
 import com.juhokall.telesina.model.TelesinaHand;
 import com.juhokall.telesina.model.TelesinaValuedCard;
 import com.juhokall.telesina.rules.TelesinaHandRater;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -53,19 +52,29 @@ public class HandSimulatorImpl implements HandSimulator {
 	@Override
 	public TelesinaValuedCard getValuedCard(TelesinaHand hand) {
 		Set simulatedCards = new HashSet<Integer>(playedCards);
-		int randomizedCard, randomizedHand, cardsLeftInDeck = deck.size();
-		randomizedCard = random.nextInt(cardsLeftInDeck--);
-		simulatedCards.add(randomizedCard);
-		hand.addNewCard(randomizedCard);
-		int firstCard = randomizedCard;
-		while (hand.getNumberOfCardsDealt() < Telesina.HAND_LENGTH) {
+		TelesinaHand newHand = new TelesinaHand(hand);
+		int randomizedCard, randomizedHand;
+		do {
+			randomizedCard = random.nextInt(Telesina.DECK_LENGTH);
+		} while (simulatedCards.contains(randomizedCard));
+		return getValuedCard(hand, randomizedCard);
+	}
+
+	@Override
+	public TelesinaValuedCard getValuedCard(TelesinaHand hand, int nextCard) {
+		Set simulatedCards = new HashSet<Integer>(playedCards);
+		TelesinaHand newHand = new TelesinaHand(hand);
+		int randomizedCard;
+		simulatedCards.add(nextCard);
+		newHand.addNewCard(nextCard);
+		while (newHand.getNumberOfCardsDealt() < Telesina.HAND_LENGTH) {
 			do {
-				randomizedCard = random.nextInt(cardsLeftInDeck--);
+				randomizedCard = random.nextInt(Telesina.DECK_LENGTH);
 			} while (simulatedCards.contains(randomizedCard));
 			simulatedCards.add(randomizedCard);
-			hand.addNewCard(randomizedCard);
+			newHand.addNewCard(randomizedCard);
 		}
-		int handValue = rater.getTelesinaHandValue(hand);
-		return new TelesinaValuedCard(firstCard, handValue);
+		int handValue = rater.getTelesinaHandValue(newHand);
+		return new TelesinaValuedCard(nextCard, handValue);
 	}
 }

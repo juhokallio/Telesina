@@ -10,5 +10,5 @@ package com.juhokall.telesina.model;
  */
 public class AISettings {
 
-	public final static int RANGE_ITERATIONS = 1000;
+	public final static int RANGE_ITERATIONS = 1000000;
 }
