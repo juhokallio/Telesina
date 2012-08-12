@@ -9,5 +9,6 @@ package com.juhokall.telesina.model;
  * @author juho
  */
 public class AISettings {
-public final static HandRange HERO_PREFLOP_RANGE = new HandRange();	
+
+	public final static int RANGE_ITERATIONS = 1000;
 }

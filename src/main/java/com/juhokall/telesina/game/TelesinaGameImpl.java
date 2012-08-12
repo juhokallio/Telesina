@@ -5,22 +5,13 @@
 package com.juhokall.telesina.game;
 
 import com.google.inject.Inject;
-import com.juhokall.telesina.game.action.Bet;
-import com.juhokall.telesina.game.action.Call;
-import com.juhokall.telesina.game.action.Check;
-import com.juhokall.telesina.game.action.Fold;
-import com.juhokall.telesina.game.action.Raise;
 import com.juhokall.telesina.game.action.TelesinaGameAction;
 import com.juhokall.telesina.model.Player;
 import com.juhokall.telesina.model.Situation;
 import com.juhokall.telesina.model.Solution;
-import com.juhokall.telesina.model.SolutionType;
 import com.juhokall.telesina.model.Telesina;
 import com.juhokall.telesina.model.TelesinaHand;
-import java.util.EnumMap;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -61,7 +52,6 @@ public class TelesinaGameImpl implements TelesinaGame {
 			deck.add(i);
 		}
 		situation = new Situation(numberOfPlayers);
-		System.out.println("foo " + situation.toString());
 	}
 
 	@Override

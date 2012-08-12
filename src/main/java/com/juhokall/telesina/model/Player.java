@@ -23,7 +23,7 @@ public class Player {
 		id = 0l;
 		playerType = PlayerType.VILLAIN;
 		number = 0;
-
+		range = new HandRange();
 		hand = new TelesinaHand();
 		this.stack = stack;
 	}

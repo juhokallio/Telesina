@@ -9,6 +9,7 @@ import com.juhokall.telesina.model.Telesina;
 import com.juhokall.telesina.model.TelesinaHand;
 import com.juhokall.telesina.model.TelesinaValuedCard;
 import com.juhokall.telesina.rules.TelesinaHandRater;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -30,16 +31,19 @@ public class HandSimulatorImpl implements HandSimulator {
 	public HandSimulatorImpl(TelesinaHandRater rater) {
 		this.rater = rater;
 		this.deck = new ArrayList<Integer>();
+		playedCards = new HashSet<Integer>();
 		for (int i = 0; i < Telesina.DECK_LENGTH; i++) {
 			deck.add(i);
 		}
 		random = new Random();
 	}
 
+	@Override
 	public void addPlayedCard(int card) {
 		playedCards.add(card);
 	}
 
+	@Override
 	public void addPlayedHand(TelesinaHand hand) {
 		for (int card : hand.getCards()) {
 			playedCards.add(card);
@@ -48,10 +52,9 @@ public class HandSimulatorImpl implements HandSimulator {
 
 	@Override
 	public TelesinaValuedCard getValuedCard(TelesinaHand hand) {
-		Set simulatedCards = new HashSet<Integer>();
+		Set simulatedCards = new HashSet<Integer>(playedCards);
 		int randomizedCard, randomizedHand, cardsLeftInDeck = deck.size();
 		randomizedCard = random.nextInt(cardsLeftInDeck--);
-		System.out.println("randomized index = " + randomizedCard);
 		simulatedCards.add(randomizedCard);
 		hand.addNewCard(randomizedCard);
 		int firstCard = randomizedCard;
@@ -63,7 +66,6 @@ public class HandSimulatorImpl implements HandSimulator {
 			hand.addNewCard(randomizedCard);
 		}
 		int handValue = rater.getTelesinaHandValue(hand);
-		System.out.println("First card: " + firstCard + ", value: " + handValue);
 		return new TelesinaValuedCard(firstCard, handValue);
 	}
 }

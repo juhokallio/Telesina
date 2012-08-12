@@ -19,11 +19,7 @@ public class TelesinaHandRaterImpl implements TelesinaHandRater {
 	public int getTelesinaHandValue(TelesinaHand hand) {
 		int value = 0;
 		value += getPairhandValue(hand.getCards());
-		System.out.println("Hand's size: " + hand.getCards().length);
 		TelesinaHumanizer humanizer = new TextualHumanizer(); 
-		for(int card : hand.getCards()) {
-			System.out.println(humanizer.humanizeCard(card));
-		}
 		return value;
 	}
 	
