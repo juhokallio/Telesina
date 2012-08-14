@@ -20,6 +20,7 @@ public class Player {
 	private Boolean turnLeft;
 	private int number;
 	private PlayerType playerType;
+	private int handRankedFor;
 
 	public Player(int stack) {
 		id = 0l;

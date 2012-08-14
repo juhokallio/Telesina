@@ -104,4 +104,14 @@ public class Situation {
 	public void setStreet(int street) {
 		this.street = street;
 	}
+	public Player[] getNonActivePlayers() {
+		Player[] naPlayers = new Player[playerCount - 1];
+		int i = 0;
+		for(int playerNumber : players.keySet()) {
+			if(playerNumber != activePlayerId) {
+				naPlayers[i++] = players.get(playerNumber);
+			}
+		}
+		return naPlayers;
+	}
 }

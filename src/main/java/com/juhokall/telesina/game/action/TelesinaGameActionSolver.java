@@ -16,21 +16,21 @@ import java.util.Map;
  */
 public class TelesinaGameActionSolver implements TelesinaGameAction {
 
-	private final static Map<SolutionType, TelesinaGameAction> solutionMethods;
+	private final static Map<SolutionType, TelesinaGameAction> SOLUTION_METHODS;
 
 	static {
-		solutionMethods = new EnumMap<SolutionType, TelesinaGameAction>(SolutionType.class);
-		solutionMethods.put(SolutionType.BET, new Bet());
-		solutionMethods.put(SolutionType.CALL, new Call());
-		solutionMethods.put(SolutionType.CHECK, new Check());
-		solutionMethods.put(SolutionType.FOLD, new Fold());
-		solutionMethods.put(SolutionType.RAISE, new Raise());
+		SOLUTION_METHODS = new EnumMap<SolutionType, TelesinaGameAction>(SolutionType.class);
+		SOLUTION_METHODS.put(SolutionType.BET, new Bet());
+		SOLUTION_METHODS.put(SolutionType.CALL, new Call());
+		SOLUTION_METHODS.put(SolutionType.CHECK, new Check());
+		SOLUTION_METHODS.put(SolutionType.FOLD, new Fold());
+		SOLUTION_METHODS.put(SolutionType.RAISE, new Raise());
 	}
 
 	@Override
 	public Boolean solve(Situation situation, Solution solution) {
 		SolutionType solutionType = solution.getSolutionType();
-		TelesinaGameAction action = solutionMethods.get(solutionType);
+		TelesinaGameAction action = SOLUTION_METHODS.get(solutionType);
 		return action.solve(situation, solution);
 	}
 }
