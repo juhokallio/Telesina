@@ -10,5 +10,19 @@ package com.juhokall.telesina.model;
  */
 public enum SolutionType {
 
-	FOLD, CALL, CHECK, BET, RAISE
+	FOLD (4), 
+	CALL (2), 
+	CHECK (3), 
+	BET (1), 
+	RAISE (5);
+
+	private int orderNumber;
+
+	SolutionType(int orderNumber) {
+		this.orderNumber = orderNumber;		
+	}
+
+	public int getOrderNumber() {
+		return orderNumber;
+	}
 }

@@ -4,7 +4,7 @@
  */
 package com.juhokall.telesina.io;
 
-import com.juhokall.telesina.model.Telesina;
+import com.juhokall.telesina.model.core.Telesina;
 
 /**
  *

@@ -2,7 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.juhokall.telesina.model;
+package com.juhokall.telesina.model.core;
+
+import com.juhokall.telesina.model.SolutionType;
 
 /**
  *
@@ -24,4 +26,6 @@ public class Telesina {
 	public static int[] CARDS_DEALT_ON_STREET = {2, 1, 1};
 	public static int DEFAULT_STACK = 100;
 	public static int DEFAULT_ANTE = 1;
+	public static int ACTION_TYPE_COUNT = 5;
+	public static SolutionType[] SOLUTION_TYPES = {SolutionType.BET, SolutionType.CALL, SolutionType.CHECK, SolutionType.FOLD, SolutionType.RAISE};
 }

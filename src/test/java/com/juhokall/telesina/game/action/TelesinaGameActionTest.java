@@ -10,7 +10,7 @@ import com.juhokall.telesina.model.Player;
 import com.juhokall.telesina.model.Situation;
 import com.juhokall.telesina.model.Solution;
 import com.juhokall.telesina.model.SolutionType;
-import com.juhokall.telesina.model.Telesina;
+import com.juhokall.telesina.model.core.Telesina;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;

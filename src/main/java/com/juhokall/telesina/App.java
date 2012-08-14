@@ -7,7 +7,7 @@ import com.juhokall.telesina.io.PlayableTelesinaGame;
 import com.juhokall.telesina.io.PlayableTelesinaGameImpl;
 import com.juhokall.telesina.model.Player;
 import com.juhokall.telesina.model.Situation;
-import com.juhokall.telesina.model.Telesina;
+import com.juhokall.telesina.model.core.Telesina;
 import java.util.List;
 import java.util.Random;
 

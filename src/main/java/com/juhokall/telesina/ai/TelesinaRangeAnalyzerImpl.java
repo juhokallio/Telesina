@@ -5,11 +5,11 @@
 package com.juhokall.telesina.ai;
 
 import com.google.inject.Inject;
-import com.juhokall.telesina.model.AISettings;
+import com.juhokall.telesina.model.ai.AISettings;
 import com.juhokall.telesina.model.HandRange;
 import com.juhokall.telesina.model.Player;
 import com.juhokall.telesina.model.Situation;
-import com.juhokall.telesina.model.Telesina;
+import com.juhokall.telesina.model.core.Telesina;
 import com.juhokall.telesina.model.TelesinaValuedCard;
 import java.util.Map;
 import java.util.Random;

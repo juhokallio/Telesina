@@ -9,7 +9,7 @@ import com.juhokall.telesina.game.action.TelesinaGameAction;
 import com.juhokall.telesina.model.Player;
 import com.juhokall.telesina.model.Situation;
 import com.juhokall.telesina.model.Solution;
-import com.juhokall.telesina.model.Telesina;
+import com.juhokall.telesina.model.core.Telesina;
 import com.juhokall.telesina.model.TelesinaHand;
 import java.util.HashSet;
 import java.util.Set;

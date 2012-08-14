@@ -4,6 +4,8 @@
  */
 package com.juhokall.telesina.model;
 
+import com.juhokall.telesina.model.core.Telesina;
+
 /**
  *
  * @author juho

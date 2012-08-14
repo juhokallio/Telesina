@@ -7,7 +7,7 @@ package com.juhokall.telesina.ai;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.juhokall.telesina.game.TelesinaGame;
-import com.juhokall.telesina.model.AISettings;
+import com.juhokall.telesina.model.ai.AISettings;
 import com.juhokall.telesina.model.HandRange;
 import com.juhokall.telesina.model.Player;
 import com.juhokall.telesina.model.Situation;

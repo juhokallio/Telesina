@@ -6,7 +6,7 @@ package com.juhokall.telesina.io;
 
 import com.juhokall.telesina.game.TelesinaGameImpl;
 import com.juhokall.telesina.model.Situation;
-import com.juhokall.telesina.model.Telesina;
+import com.juhokall.telesina.model.core.Telesina;
 import java.util.Random;
 import java.util.Set;
 

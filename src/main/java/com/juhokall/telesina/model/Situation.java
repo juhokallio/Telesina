@@ -4,6 +4,7 @@
  */
 package com.juhokall.telesina.model;
 
+import com.juhokall.telesina.model.core.Telesina;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

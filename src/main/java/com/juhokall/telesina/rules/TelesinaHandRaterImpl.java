@@ -6,7 +6,7 @@ package com.juhokall.telesina.rules;
 
 import com.juhokall.telesina.io.TelesinaHumanizer;
 import com.juhokall.telesina.io.TextualHumanizer;
-import com.juhokall.telesina.model.Telesina;
+import com.juhokall.telesina.model.core.Telesina;
 import com.juhokall.telesina.model.TelesinaHand;
 
 /**

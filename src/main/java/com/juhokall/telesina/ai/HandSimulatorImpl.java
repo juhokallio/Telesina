@@ -5,7 +5,7 @@
 package com.juhokall.telesina.ai;
 
 import com.google.inject.Inject;
-import com.juhokall.telesina.model.Telesina;
+import com.juhokall.telesina.model.core.Telesina;
 import com.juhokall.telesina.model.TelesinaHand;
 import com.juhokall.telesina.model.TelesinaValuedCard;
 import com.juhokall.telesina.rules.TelesinaHandRater;
