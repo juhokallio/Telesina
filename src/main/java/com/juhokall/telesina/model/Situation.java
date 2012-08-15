@@ -23,6 +23,7 @@ public class Situation {
 	private int activePlayerId;
 	private int playerCount;
 	private Player activePlayer;
+	private Solution lastSolution;
 
 	public Situation(int playerCount, int stackSizes) {
 		Player temp;
@@ -40,6 +41,15 @@ public class Situation {
 		activePlayerId = 0;
 		potSize = playerCount * Telesina.DEFAULT_ANTE;
 		street = 0;
+		lastSolution = new Solution(SolutionType.CHECK);
+	}
+
+	public Solution getLastSolution() {
+		return lastSolution;
+	}
+
+	public void setLastSolution(Solution lastSolution) {
+		this.lastSolution = lastSolution;
 	}
 
 	public Situation(int playersCount) {

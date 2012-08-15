@@ -20,6 +20,10 @@ public class Strategy {
 		this.tactics = tactics;
 	}
 
+	public Strategy(Strategy strategy) {
+		this.tactics = strategy.getTactics();
+	}
+
 	public Strategy() {
 		tactics = new HashMap<Integer, Tactic>();
 	}
@@ -37,6 +41,10 @@ public class Strategy {
 			System.out.println("The strategy was empty and returned an empty tactic.");
 			return new Tactic();
 		}
+	}
+
+	public Map<Integer, Tactic> getTactics() {
+		return tactics;
 	}
 
 	public void putNewTactic(int breakpoint, Tactic tactic) {

@@ -5,25 +5,46 @@
 package com.juhokall.telesina.ai;
 
 import com.juhokall.telesina.model.Situation;
+import com.juhokall.telesina.model.Solution;
+import com.juhokall.telesina.model.SolutionType;
+import com.juhokall.telesina.model.ai.AISettings;
 import com.juhokall.telesina.model.ai.Strategy;
 import com.juhokall.telesina.model.ai.Tactic;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
  * @author juho
  */
-public class StrategyFactorySimple implements StrategyFactory{
-	private static final int[] breakpoints = {25, 50, 75, 100};
+public class StrategyFactorySimple implements StrategyFactory {
 
 	@Override
-	public Strategy[] getStrategies(Situation situation) {
-		Strategy[] strategies = new Strategy[4];
-	
-	
-		//fill strategies with default tactics
-			
+	public Set<Strategy> getStrategies(Situation situation) {
+		Set<Strategy> strategies;
+		Solution lastSolution = situation.getLastSolution();
+		SolutionType lastSolutionType = lastSolution.getSolutionType();
+		strategies = getStrategies(lastSolutionType);
 		return strategies;
 	}
-	
-}
 
+	private Set<Strategy> getStrategies(SolutionType lastSolutionType) {
+		if (lastSolutionType == SolutionType.CHECK) {
+			return buildStrategies(new Strategy(), 0, AISettings.DEFAULT_1ST_ACTION_PERCENTAGES);
+		} else {
+			return buildStrategies(new Strategy(), 0, AISettings.DEFAULT_2ST_ACTION_PERCENTAGES);
+		}
+	}
+
+	private Set<Strategy> buildStrategies(Strategy strategy, int breakpointNumber, int[][] actionPercentages) {
+		Set<Strategy> strategies = new HashSet<Strategy>();
+		for (int[] actionPercentageSet : actionPercentages) {
+			Strategy s = new Strategy(strategy);
+			s.putNewTactic(AISettings.DEFAULT_BREAKPOINTS[breakpointNumber], new Tactic(actionPercentageSet));
+			if (breakpointNumber < AISettings.DEFAULT_BREAKPOINTS.length - 1) {
+				strategies.addAll(buildStrategies(s, breakpointNumber + 1, actionPercentages));
+			}
+		}
+		return strategies;
+	}
+}

@@ -9,6 +9,7 @@ import com.juhokall.telesina.model.Player;
 import com.juhokall.telesina.model.Situation;
 import com.juhokall.telesina.model.ai.AISettings;
 import com.juhokall.telesina.model.ai.Strategy;
+import java.util.Set;
 
 /**
  *
@@ -16,8 +17,7 @@ import com.juhokall.telesina.model.ai.Strategy;
  */
 public class StrategyFactoryImpl implements StrategyFactory{
 
-	@Override
-	public Strategy[] getStrategies(Situation situation) {
+	public Strategy[] getStrategiesasdf(Situation situation) {
 		Strategy[] strategies = new Strategy[AISettings.STRATEGY_CANDIDATE_COUNT];
 		
 		HandRange heroRange = situation.getActivePlayer().getRange();
@@ -33,6 +33,11 @@ public class StrategyFactoryImpl implements StrategyFactory{
 		}
 
 		return strategies;
+	}
+
+	@Override
+	public Set<Strategy> getStrategies(Situation situation) {
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 	

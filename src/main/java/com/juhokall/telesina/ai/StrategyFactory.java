@@ -4,6 +4,7 @@
  */
 package com.juhokall.telesina.ai;
 
+import com.google.inject.ImplementedBy;
 import com.juhokall.telesina.model.Situation;
 import com.juhokall.telesina.model.ai.Strategy;
 import java.util.Set;
@@ -12,7 +13,8 @@ import java.util.Set;
  *
  * @author juho
  */
+@ImplementedBy(StrategyFactorySimple.class)
 public interface StrategyFactory {
-	public Strategy[] getStrategies(Situation situation);
+	public Set<Strategy> getStrategies(Situation situation);
 	
 }
