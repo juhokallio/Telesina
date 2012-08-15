@@ -20,19 +20,30 @@ import java.util.Set;
 public class StrategyFactorySimple implements StrategyFactory {
 
 	@Override
-	public Set<Strategy> getStrategies(Situation situation) {
-		Set<Strategy> strategies;
+	public Set<Strategy> getStrategies(Situation situation, Boolean lazyStrategy) {
 		Solution lastSolution = situation.getLastSolution();
 		SolutionType lastSolutionType = lastSolution.getSolutionType();
-		strategies = getStrategies(lastSolutionType);
-		return strategies;
+		return getStrategies(lastSolutionType, lazyStrategy);
 	}
 
-	private Set<Strategy> getStrategies(SolutionType lastSolutionType) {
-		if (lastSolutionType == SolutionType.CHECK) {
-			return buildStrategies(new Strategy(), 0, AISettings.DEFAULT_1ST_ACTION_PERCENTAGES);
+	@Override
+	public Set<Strategy> getStrategies(Situation situation) {
+		return getStrategies(situation, false);
+	}
+
+	private Set<Strategy> getStrategies(SolutionType lastSolutionType, Boolean lazyStrategy) {
+		if (lazyStrategy) {
+			if (lastSolutionType == SolutionType.CHECK) {
+				return buildStrategies(new Strategy(), 0, AISettings.DEFAULT_1ST_ACTION_PERCENTAGES);
+			} else {
+				return buildStrategies(new Strategy(), 0, AISettings.DEFAULT_2ST_ACTION_PERCENTAGES);
+			}
 		} else {
-			return buildStrategies(new Strategy(), 0, AISettings.DEFAULT_2ST_ACTION_PERCENTAGES);
+			if (lastSolutionType == SolutionType.CHECK) {
+				return buildStrategies(new Strategy(), 0, AISettings.DEFAULT_1ST_ACTION_PERCENTAGES);
+			} else {
+				return buildStrategies(new Strategy(), 0, AISettings.DEFAULT_2ST_ACTION_PERCENTAGES);
+			}
 		}
 	}
 

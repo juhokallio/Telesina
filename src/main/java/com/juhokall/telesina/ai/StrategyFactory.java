@@ -16,5 +16,5 @@ import java.util.Set;
 @ImplementedBy(StrategyFactorySimple.class)
 public interface StrategyFactory {
 	public Set<Strategy> getStrategies(Situation situation);
-	
+	public Set<Strategy> getStrategies(Situation situation, Boolean lazyStrategy);
 }

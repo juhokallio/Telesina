@@ -20,5 +20,6 @@ public interface TelesinaGame {
 	public Situation solveSituation(Solution solution);
 	public Situation getSituation();
 	public void setNewGame(int numberOfPlayers);
+	public void setNewGame(Situation situation);
 	public Set getDeck();
 }

@@ -36,6 +36,11 @@ public class StrategyFactoryImpl implements StrategyFactory{
 	}
 
 	@Override
+	public Set<Strategy> getStrategies(Situation situation, Boolean lazyStrategy) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	@Override
 	public Set<Strategy> getStrategies(Situation situation) {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}

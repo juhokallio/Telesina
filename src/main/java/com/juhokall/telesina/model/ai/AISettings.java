@@ -17,4 +17,7 @@ public class AISettings {
 	public final static int[][] DEFAULT_1ST_ACTION_PERCENTAGES = {{100, 0, 0, 0, 0}, {0, 0, 100, 0, 0}, {65, 0, 35, 0, 0}, {35, 0, 65, 0, 0}};
 	public final static int[][] DEFAULT_2ST_ACTION_PERCENTAGES = {{0, 100, 0, 0, 0}, {0, 0, 0, 100, 0}, {0, 0, 0, 0, 100}, {0, 0, 0, 75, 25}};
 	public static final int[] DEFAULT_BREAKPOINTS = {25, 50, 75, 100};
+	public final static int[][] LAZY_1ST_ACTION_PERCENTAGES = {{100, 0, 0, 0, 0}, {0, 0, 100, 0, 0}};
+	public final static int[][] LAZY_2ST_ACTION_PERCENTAGES = {{0, 100, 0, 0, 0}, {0, 0, 0, 100, 0}, {0, 0, 0, 0, 100}};
+	public static final int[] LAZY_BREAKPOINTS = {25, 75, 100};
 }
