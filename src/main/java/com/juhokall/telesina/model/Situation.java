@@ -24,6 +24,7 @@ public class Situation {
 	private int playerCount;
 	private Player activePlayer;
 	private Solution lastSolution;
+	private int playersLeft;
 
 	public Situation(int playerCount, int stackSizes) {
 		Player temp;
@@ -42,6 +43,7 @@ public class Situation {
 		potSize = playerCount * Telesina.DEFAULT_ANTE;
 		street = 0;
 		lastSolution = new Solution(SolutionType.CHECK);
+		playersLeft = playerCount;
 	}
 
 	public Solution getLastSolution() {
@@ -54,6 +56,56 @@ public class Situation {
 
 	public Situation(int playersCount) {
 		this(playersCount, Telesina.DEFAULT_STACK);
+	}
+
+	@Override
+	public Situation clone() {
+		Situation s = new Situation(playerCount);
+		s.setStreet(street);
+		s.setPotSize(potSize);
+		s.setPlayerCount(playerCount);
+		List<Integer> ids = new ArrayList<Integer>();
+		Map<Integer, Player> ps = new HashMap<Integer, Player>();
+		for(int id : playerIds) {
+			ids.add(id);
+			ps.put(id, players.get(id).clone());
+		}
+		s.setPlayerIds(ids);
+		s.setPlayers(ps);
+		s.setActivePlayer(activePlayer.clone());
+		s.setActivePlayerId(activePlayerId);
+		s.setPlayersLeft(playersLeft);
+		return s;
+	}
+	public void decreasePlayersLeft() {
+		playersLeft--;
+	}
+	public int getPlayersLeft() {
+		return playersLeft;
+	}
+
+	public void setPlayersLeft(int playersLeft) {
+		this.playersLeft = playersLeft;
+	}
+
+	public void setPlayers(Map<Integer, Player> players) {
+		this.players = players;
+	}
+
+	public void setPlayerIds(List<Integer> playerIds) {
+		this.playerIds = playerIds;
+	}
+
+	public void setActivePlayerId(int activePlayerId) {
+		this.activePlayerId = activePlayerId;
+	}
+
+	public void setPlayerCount(int playerCount) {
+		this.playerCount = playerCount;
+	}
+
+	public void setActivePlayer(Player activePlayer) {
+		this.activePlayer = activePlayer;
 	}
 
 	public Map<Integer, Player> getPlayers() {

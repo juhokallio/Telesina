@@ -4,6 +4,7 @@
  */
 package com.juhokall.telesina.ai;
 
+import com.juhokall.telesina.model.Situation;
 import com.juhokall.telesina.model.ai.Strategy;
 
 /**
@@ -11,5 +12,5 @@ import com.juhokall.telesina.model.ai.Strategy;
  * @author juho
  */
 public interface StrategyCrawler {
-	public int crawlStrategy(Strategy strategy);
+	public int crawlStrategy(Situation situation, Strategy strategy);
 }

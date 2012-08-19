@@ -35,6 +35,18 @@ public class Player {
 		this(Telesina.DEFAULT_STACK);
 	}
 
+	@Override
+	public Player clone() {
+		Player p = new Player(stack);
+		p.setId(id);
+		p.setHand(hand);
+		p.setLastSolution(lastSolution);
+		p.setNumber(number);
+		p.setPlayerType(playerType);
+		p.setRange(range);
+		p.setTurnLeft(turnLeft);
+		return p;
+	}
 	public int getNumber() {
 		return number;
 	}

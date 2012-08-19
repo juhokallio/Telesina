@@ -22,13 +22,19 @@ public class TelesinaGameImpl implements TelesinaGame {
 
 	private Situation situation;
 	private Set deck;
-	@Inject
 	private TelesinaGameAction action;
 
+	@Inject
+	public TelesinaGameImpl(TelesinaGameAction action) {
+		this.action = action;
+	}
+
+	
 	@Override
 	public Situation solveSituation(Solution solution) {
-		action.solve(situation, solution);
-		return situation;
+		Situation nextSituation = situation.clone();
+		action.solve(nextSituation, solution);
+		return nextSituation;
 	}
 
 
