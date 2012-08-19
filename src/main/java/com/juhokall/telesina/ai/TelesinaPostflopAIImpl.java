@@ -8,7 +8,8 @@ import com.google.inject.Inject;
 import com.juhokall.telesina.model.HandRange;
 import com.juhokall.telesina.model.Situation;
 import com.juhokall.telesina.model.Solution;
-import com.juhokall.telesina.rules.TelesinaHandRater;
+import com.juhokall.telesina.model.ai.Strategy;
+import java.util.Set;
 
 /**
  *
@@ -16,22 +17,20 @@ import com.juhokall.telesina.rules.TelesinaHandRater;
  */
 public class TelesinaPostflopAIImpl implements TelesinaPostflopAI{
 
+	private StrategyFactory strategyFactory;
 	private TelesinaRangeAnalyzer rangeAnalyzer;
-	private HandSimulator handSimulator;
-	private TelesinaHandRater handRater;
-
+	
 	@Inject
-	public TelesinaPostflopAIImpl(TelesinaRangeAnalyzer rangeAnalyzer, HandSimulator handSimulator, TelesinaHandRater handRater) {
+	public TelesinaPostflopAIImpl(StrategyFactory strategyFactory, TelesinaRangeAnalyzer rangeAnalyzer) {
+		this.strategyFactory = strategyFactory;
 		this.rangeAnalyzer = rangeAnalyzer;
-		this.handSimulator = handSimulator;
-		this.handRater = handRater;
 	}
 	
 	@Override
 	public Solution getSolution(Situation situation) {
+		Set<Strategy> strategyCandidates = strategyFactory.getStrategies(situation);
 		HandRange[] ranges = rangeAnalyzer.getRanges(situation);
 		
-
 		return null;
 	}
 	

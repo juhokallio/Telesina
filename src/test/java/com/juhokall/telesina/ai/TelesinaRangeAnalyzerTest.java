@@ -25,8 +25,8 @@ import org.junit.Test;
  */
 public class TelesinaRangeAnalyzerTest {
 
-	TelesinaGame game;
-	TelesinaRangeAnalyzer rangeAnalyzer;
+	private TelesinaGame game;
+	private TelesinaRangeAnalyzer rangeAnalyzer;
 
 	@Before
 	public void initialize() {

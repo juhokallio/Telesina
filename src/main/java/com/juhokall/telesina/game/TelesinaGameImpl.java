@@ -55,7 +55,14 @@ public class TelesinaGameImpl implements TelesinaGame {
 	}
 
 	@Override
+	public void setNewGame(Situation situation) {
+		this.situation = situation;
+	}
+	
+
+	@Override
 	public Set getDeck() {
 		return deck;
 	}
+	
 }

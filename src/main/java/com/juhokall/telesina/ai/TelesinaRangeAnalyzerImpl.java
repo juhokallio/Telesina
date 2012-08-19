@@ -11,6 +11,8 @@ import com.juhokall.telesina.model.Player;
 import com.juhokall.telesina.model.Situation;
 import com.juhokall.telesina.model.core.Telesina;
 import com.juhokall.telesina.model.TelesinaValuedCard;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -57,4 +59,6 @@ public class TelesinaRangeAnalyzerImpl implements TelesinaRangeAnalyzer {
 		}
 		return ranges;
 	}
+
+	
 }

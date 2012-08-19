@@ -15,6 +15,7 @@ import com.juhokall.telesina.model.TelesinaHand;
 public interface TelesinaHandRater {
 	
 	public int getHighcardValue(int card);
-	public int getPairhandValue(int[] hand);
+//	public int getPairhandValue(int[] hand);
 	public int getTelesinaHandValue(TelesinaHand hand);
+	public int getTelesinaHandValue(int[] hand);
 }

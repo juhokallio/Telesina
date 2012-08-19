@@ -12,6 +12,7 @@ import com.juhokall.telesina.model.SolutionType;
  */
 public class Telesina {
 	public static final int HAND_LENGTH = 6;
+	public static final int RATEABLE_HAND_LENGTH = 5;
 	public static final int DECK_LENGTH = 32;
 	public static final String[] SUITS = {"Spades", "Clubs", "Diamonds", "Hearts" };
 	public static final String[] SUITS_SHORT = {"S", "C", "D", "H" };
@@ -20,7 +21,9 @@ public class Telesina {
 	public static final int RANK_COUNT = 8;
 	public static final int SUIT_COUNT = 4;
 	public static int PAIR_VALUE = 32;
-	public static int TWO_PAIR_VALUE = 40;
+	public static int TWO_PAIR_VALUE = 288;
+	public static int STRAIGHT_VALUE = 500; //Not tightest
+	public static int FLUSH_VALUE = 1000; //Same
 	public static int STREET_COUNT = 4;
 	public static int NORMAL_STREET_COUNT = 3;
 	public static int[] CARDS_DEALT_ON_STREET = {2, 1, 1};

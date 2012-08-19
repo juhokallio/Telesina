@@ -15,6 +15,7 @@ import java.util.Collections;
 public class HandRange {
 private final static int ORIGINAL_WEIGHT = 100;	
 	private ArrayList<TelesinaValuedCard> handValues;
+	private ArrayList<Integer> values;
 		private int[] range;
 		private TelesinaValuedCardComparator comparator;
 	
@@ -24,11 +25,13 @@ private final static int ORIGINAL_WEIGHT = 100;
 			range[i] = ORIGINAL_WEIGHT;
 		} 
 		handValues = new ArrayList<TelesinaValuedCard>();
+		values = new ArrayList<Integer>();
 		comparator = new TelesinaValuedCardComparator();
 	}
 
 	public void sortValues() {
 		Collections.sort(handValues, comparator);
+		Collections.sort(values);
 	}
 	
 	public int[] getRange() {
@@ -48,6 +51,10 @@ private final static int ORIGINAL_WEIGHT = 100;
 	}
 	
 	public void addValuedCard (TelesinaValuedCard valuedCard){
+		values.add(valuedCard.getValue());
 		handValues.add(valuedCard);
+	}
+	public ArrayList<Integer> getValues() {
+		return values;
 	}
 }
