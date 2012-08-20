@@ -33,13 +33,13 @@ public class StrategyFactorySimple implements StrategyFactory {
 
 	private Set<Strategy> getStrategies(SolutionType lastSolutionType, Boolean lazyStrategy) {
 		if (lazyStrategy) {
-			if (lastSolutionType == SolutionType.CHECK) {
+			if (lastSolutionType == SolutionType.CHECK || lastSolutionType == SolutionType.CALL) {
 				return buildStrategies(new Strategy(), 0, AISettings.LAZY_BREAKPOINTS, AISettings.LAZY_1ST_ACTION_PERCENTAGES);
 			} else {
 				return buildStrategies(new Strategy(), 0, AISettings.LAZY_BREAKPOINTS, AISettings.LAZY_2ST_ACTION_PERCENTAGES);
 			}
 		} else {
-			if (lastSolutionType == SolutionType.CHECK) {
+			if (lastSolutionType == SolutionType.CHECK || lastSolutionType == SolutionType.CALL) {
 				return buildStrategies(new Strategy(), 0, AISettings.DEFAULT_BREAKPOINTS, AISettings.DEFAULT_1ST_ACTION_PERCENTAGES);
 			} else {
 				return buildStrategies(new Strategy(), 0, AISettings.DEFAULT_BREAKPOINTS, AISettings.DEFAULT_2ST_ACTION_PERCENTAGES);
@@ -54,6 +54,8 @@ public class StrategyFactorySimple implements StrategyFactory {
 			s.putNewTactic(AISettings.DEFAULT_BREAKPOINTS[breakpointNumber], new Tactic(actionPercentageSet));
 			if (breakpointNumber < AISettings.DEFAULT_BREAKPOINTS.length - 1) {
 				strategies.addAll(buildStrategies(s, breakpointNumber + 1, breakpoints, actionPercentages));
+			} else {
+				strategies.add(s);
 			}
 		}
 		return strategies;

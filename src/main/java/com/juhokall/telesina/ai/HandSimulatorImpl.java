@@ -62,6 +62,11 @@ public class HandSimulatorImpl implements HandSimulator {
 
 	@Override
 	public TelesinaValuedCard getValuedCard(TelesinaHand hand, int nextCard) {
+		return new TelesinaValuedCard(nextCard, getValue(hand, nextCard));
+	}
+
+	@Override
+	public int getValue(TelesinaHand hand, int nextCard) {
 		Set simulatedCards = new HashSet<Integer>(playedCards);
 		TelesinaHand newHand = new TelesinaHand(hand);
 		int randomizedCard;
@@ -74,7 +79,6 @@ public class HandSimulatorImpl implements HandSimulator {
 			simulatedCards.add(randomizedCard);
 			newHand.addNewCard(randomizedCard);
 		}
-		int handValue = rater.getTelesinaHandValue(newHand);
-		return new TelesinaValuedCard(nextCard, handValue);
+		return rater.getTelesinaHandValue(newHand);
 	}
 }

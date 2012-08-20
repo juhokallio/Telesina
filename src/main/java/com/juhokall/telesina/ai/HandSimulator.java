@@ -18,4 +18,5 @@ public interface HandSimulator{
 	public TelesinaValuedCard getValuedCard(TelesinaHand hand, int nextCard);
 	public void addPlayedCard(int card);
 	public void addPlayedHand(TelesinaHand hand);
+	public int getValue(TelesinaHand hand, int nextCard);
 }

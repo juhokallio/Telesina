@@ -27,14 +27,24 @@ public class TelesinaGameImpl implements TelesinaGame {
 	@Inject
 	public TelesinaGameImpl(TelesinaGameAction action) {
 		this.action = action;
+		this.situation = new Situation(2);
 	}
 
 	
 	@Override
-	public Situation solveSituation(Solution solution) {
-		Situation nextSituation = situation.clone();
+	public Situation solveSituation(Situation s, Solution solution) {
+		Situation nextSituation = s.clone();
 		action.solve(nextSituation, solution);
+		if(nextSituation.getPlayersLeft() == 0) {
+			nextSituation.moveToNextStreet();
+		} else {
+			setNextPlayer(nextSituation);		
+			nextSituation.setLastSolution(solution);
+		} 		
 		return nextSituation;
+	}
+	private void setNextPlayer(Situation situation) {
+		situation.setActivePlayer(situation.getNonActivePlayers()[0]);
 	}
 
 

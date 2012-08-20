@@ -17,7 +17,7 @@ import java.util.Set;
 public interface TelesinaGame {
 
 	public void dealCardForPlayer(int card, int playerNumber);
-	public Situation solveSituation(Solution solution);
+	public Situation solveSituation(Situation situation, Solution solution);
 	public Situation getSituation();
 	public void setNewGame(int numberOfPlayers);
 	public void setNewGame(Situation situation);

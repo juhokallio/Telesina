@@ -12,8 +12,8 @@ import com.juhokall.telesina.model.Solution;
  *
  * @author juho
  */
-@ImplementedBy(TelesinaAIImpl.class)
+@ImplementedBy(TelesinaAISimple.class)
 public interface TelesinaAI {
 
-	public Solution getSolution(Situation situation);
+	public Solution getSolution(Situation situation, int holeCard);
 }

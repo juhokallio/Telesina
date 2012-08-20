@@ -83,6 +83,9 @@ public class Situation {
 	public int getPlayersLeft() {
 		return playersLeft;
 	}
+	public void moveToNextStreet() {
+		street++;
+	}
 
 	public void setPlayersLeft(int playersLeft) {
 		this.playersLeft = playersLeft;

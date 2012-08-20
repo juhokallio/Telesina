@@ -22,6 +22,16 @@ public class Solution {
 	public Solution(SolutionType solutionType) {
 		this(solutionType, 0);
 	}
+
+	public Solution(SolutionType solutionType, Situation situation) {
+		this.solutionType = solutionType;
+		if(solutionType == SolutionType.CALL) {
+			solutionSize = situation.getLastSolution().getSolutionSize();
+		} else {
+			solutionSize = situation.getPotSize();
+		}
+	}
+	
 	
 
 	public HandRange getRange() {

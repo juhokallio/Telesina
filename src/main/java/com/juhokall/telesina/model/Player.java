@@ -25,6 +25,7 @@ public class Player {
 	public Player(int stack) {
 		id = 0l;
 		playerType = PlayerType.VILLAIN;
+		lastSolution = new Solution(SolutionType.CHECK);
 		number = 0;
 		range = new HandRange();
 		hand = new TelesinaHand();

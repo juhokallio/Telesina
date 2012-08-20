@@ -25,6 +25,14 @@ public class Tactic {
 	public int[] getActionPercentages() {
 		return actionPercentages;
 	}
+	public Tactic clone() {
+		Tactic clone = new Tactic();
+		int[] clonePercentages = new int[actionPercentages.length];
+		for(int i = 0; i < actionPercentages.length; i++) {
+			clonePercentages[i] = actionPercentages[i];
+		}
+		return clone;
+	}
 
 	public void setActionPercentages(int[] actionPercentages) {
 		this.actionPercentages = actionPercentages;

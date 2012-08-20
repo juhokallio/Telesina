@@ -4,8 +4,10 @@
  */
 package com.juhokall.telesina.game.action;
 
+import com.juhokall.telesina.model.Player;
 import com.juhokall.telesina.model.Situation;
 import com.juhokall.telesina.model.Solution;
+import com.juhokall.telesina.model.core.Telesina;
 
 /**
  *
@@ -16,9 +18,13 @@ public class Call implements TelesinaGameAction {
 	@Override
 	public Boolean solve(Situation situation, Solution solution) {
 		int betSize = solution.getSolutionSize();
-		int takenFromStack = situation.getActivePlayer().removeFromStack(betSize);
+		Player hero = situation.getActivePlayer();
+		int takenFromStack = hero.removeFromStack(betSize);
 		situation.addToPot(takenFromStack);
+		if (hero.getStack() == 0 && situation.getPlayerCount() <= 2) {
+			situation.setStreet(Telesina.STREET_COUNT - 1);
+		}
+		situation.decreasePlayersLeft();
 		return true;
 	}
-	
 }

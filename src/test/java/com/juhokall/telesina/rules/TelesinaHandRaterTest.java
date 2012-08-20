@@ -86,7 +86,9 @@ public class TelesinaHandRaterTest {
 	public void twoPairTest2() {
 		int[] hand1 = {0, 8, 3, 11};
 		int[] hand2 = {1, 9, 2, 10};
-		Assert.assertTrue(handRater.getTelesinaHandValue(hand1) > handRater.getTelesinaHandValue(hand2));
+		int value1 = handRater.getTelesinaHandValue(hand1);
+		System.out.println(value1);
+		Assert.assertTrue(value1 > handRater.getTelesinaHandValue(hand2));
 	}
 
 	@Test

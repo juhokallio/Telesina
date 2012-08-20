@@ -6,6 +6,7 @@ package com.juhokall.telesina.ai;
 
 import com.google.inject.Inject;
 import com.juhokall.telesina.game.TelesinaGame;
+import com.juhokall.telesina.model.Player;
 import com.juhokall.telesina.model.Situation;
 import com.juhokall.telesina.model.Solution;
 import com.juhokall.telesina.model.SolutionType;
@@ -33,38 +34,25 @@ public class StrategyCrawlerImpl implements StrategyCrawler {
 	}
 
 	@Override
-	public int crawlStrategy(Situation situation, Strategy strategy) {
-		if(situation.getStreet() == Telesina.STREET_COUNT - 1 && situation.getPlayersLeft() == 0) {
-			double equity = rangeComparator.getEquity(situation.getActivePlayer().getRange(), situation.getNonActivePlayers()[0].getRange());
-			
-		}
+	public void crawlStrategy(Situation situation, Strategy strategy) {
 		int value = 0;
 		Map<Integer, Tactic> tactics = strategy.getTactics();
 		Tactic tactic;
 		for (int rangeLimit : tactics.keySet()) {
+			double rl = (double) rangeLimit;
 			tactic = tactics.get(rangeLimit);
 			int[] actionPercentages = tactic.getActionPercentages();
 			for (int actionIndex = 0; actionIndex < Telesina.ACTION_TYPE_COUNT; actionIndex++) {
 				if (actionPercentages[actionIndex] > 0) {
-					int probability = rangeLimit * actionPercentages[actionIndex];
-					if (Telesina.SOLUTION_TYPES[actionIndex] == SolutionType.FOLD) {
-						value -= probability * situation.getPotSize();
-					} else if(situation.getStreet() == Telesina.STREET_COUNT && situation.) {
-						value += probability * situation.getPotSize();//asdfg
-					}else{
-						Solution solution = new Solution(Telesina.SOLUTION_TYPES[actionIndex]);
-						Situation nextSituation = game.solveSituation(solution);
-						Set<Strategy> nextStrategies = strategyFactory.getStrategies(nextSituation, true);
-						int nextStrategyValue = crawlStrategySet(nextSituation, nextStrategies).getEstimatedValue();
-						value -= rangeLimit * actionPercentages[actionIndex] * nextStrategyValue;
-					}
+					double probability = (rl / 100) * (((double)actionPercentages[actionIndex]) / 100);
+					value += valueTactic(situation, probability, Telesina.SOLUTION_TYPES[actionIndex]);
 				}
 			}
 		}
 		strategy.setEstimatedValue(value);
-		return value;
 	}
 
+	@Override
 	public Strategy crawlStrategySet(Situation situation, Set<Strategy> strategies) {
 		Strategy bestStrategy = null;
 		for (Strategy strategy : strategies) {
@@ -74,5 +62,37 @@ public class StrategyCrawlerImpl implements StrategyCrawler {
 			}
 		}
 		return bestStrategy;
+	}
+
+	@Override
+	public int valueTactic(Situation situation, double probability, SolutionType tacticType) {
+		int value = 0;
+		if (tacticType == SolutionType.FOLD) {
+			value -= probability * situation.getPotSize();
+		} else {
+			Solution solution = new Solution(tacticType, situation);
+			Situation nextSituation = game.solveSituation(situation, solution);
+			if (situationHasPlayLeft(nextSituation)) {
+				Set<Strategy> nextStrategies = strategyFactory.getStrategies(nextSituation, true);
+				int nextStrategyValue = crawlStrategySet(nextSituation, nextStrategies).getEstimatedValue();
+				value -= probability * nextStrategyValue + solution.getSolutionSize();
+			} else {
+				value += (valueRanges(situation) - solution.getSolutionSize()) * probability;
+			}
+		}
+		return value;
+	}
+
+	private boolean situationHasPlayLeft(Situation s) {
+		return s.getStreet() != Telesina.STREET_COUNT;
+	}
+
+	private int valueRanges(Situation s, int probability) {
+		return valueRanges(s) * probability;
+	}
+	private int valueRanges(Situation s) {
+				Player hero = s.getActivePlayer(), villain = s.getNonActivePlayers()[0];
+		double rangeEquity = rangeComparator.getEquity(hero.getRange(), villain.getRange());
+		return (int) (rangeEquity * s.getPotSize());
 	}
 }

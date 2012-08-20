@@ -4,8 +4,10 @@
  */
 package com.juhokall.telesina.game.action;
 
+import com.juhokall.telesina.model.Player;
 import com.juhokall.telesina.model.Situation;
 import com.juhokall.telesina.model.Solution;
+import com.juhokall.telesina.model.core.Telesina;
 
 /**
  *
@@ -15,7 +17,17 @@ public class Raise implements TelesinaGameAction {
 
 	@Override
 	public Boolean solve(Situation situation, Solution solution) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		int betSize = solution.getSolutionSize();
+		int originalBetSize = situation.getLastSolution().getSolutionSize();
+		Call call = new Call();
+		call.solve(situation, solution);
+		if (betSize >= Telesina.DEFAULT_ANTE && betSize <= situation.getPotSize()) {
+			Player player = situation.getActivePlayer();
+			player.removeFromStack(betSize);
+			situation.addToPot(betSize);
+			return true;
+		} else {
+			return false;
+		}
 	}
-	
 }

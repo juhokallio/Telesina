@@ -21,7 +21,11 @@ public class Strategy {
 	}
 
 	public Strategy(Strategy strategy) {
-		this.tactics = strategy.getTactics();
+		tactics = new HashMap<Integer, Tactic>();
+		Map<Integer, Tactic> alienTactics = strategy.getTactics();
+		for(int n : alienTactics.keySet()){
+			tactics.put(n, alienTactics.get(n));
+		}
 	}
 
 	public Strategy() {
@@ -32,7 +36,7 @@ public class Strategy {
 		int closestBreakpoint = -1;
 		for (int breakpoint : tactics.keySet()) {
 			if (telesinaHandRating > breakpoint && (closestBreakpoint == -1 || breakpoint < closestBreakpoint)) {
-				closestBreakpoint = telesinaHandRating;
+				closestBreakpoint = breakpoint;
 			}
 		}
 		if (closestBreakpoint != -1) {

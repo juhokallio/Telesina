@@ -35,4 +35,11 @@ public class HandSimulatorTest {
 		System.out.println("value: " + valuedCard.getValue());
 		Assert.assertTrue(valuedCard.getValue() >= Telesina.TWO_PAIR_VALUE);
 	}
+	@Test
+	public void simulatorTest2() {
+		
+		int[] h1 = {2,6,8,11,18};
+		int value = handSimulator.getValue(new TelesinaHand(h1), 1);
+		Assert.assertTrue(value > 0);
+	}
 }

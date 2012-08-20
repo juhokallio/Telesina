@@ -31,7 +31,13 @@ public class StrategyFactorySimpleTest {
 	public void simpleStrategyFactoryTest1() {
 		Situation situation = new Situation(2);
 		Set<Strategy> strategies = strategyFactory.getStrategies(situation);
-		int combinations = AISettings.DEFAULT_1ST_ACTION_PERCENTAGES.length ^ AISettings.DEFAULT_BREAKPOINTS.length; 
+		int combinations = (int) Math.pow(AISettings.DEFAULT_1ST_ACTION_PERCENTAGES.length, AISettings.DEFAULT_BREAKPOINTS.length); 
+		Strategy lastOne = null;
+		for(Strategy strategy : strategies) {
+				Assert.assertTrue(lastOne != strategy);
+				lastOne = strategy;
+		}
+		System.out.println(combinations);
 		Assert.assertEquals(combinations, strategies.size());
 	}
 }
