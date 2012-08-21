@@ -11,7 +11,7 @@ import com.juhokall.telesina.game.TelesinaGame;
  *
  * @author juho
  */
-@ImplementedBy(PlayableTelesinaGameImpl.class)
+//@ImplementedBy(PlayableTelesinaGameImpl.class)
 public interface PlayableTelesinaGame extends TelesinaGame {
  	public void dealNextStreet();	
 }

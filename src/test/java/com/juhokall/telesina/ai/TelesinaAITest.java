@@ -31,7 +31,7 @@ public class TelesinaAITest {
 
 	@Test
 	public void aiTest1() {
-		Situation situation = new Situation(2);
+		Situation situation = new Situation(2, 10);
 		situation.setStreet(2);
 		situation.addToPot(10);
 		Player p1 = situation.getPlayer(0);

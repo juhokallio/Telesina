@@ -15,6 +15,7 @@ public class Check implements TelesinaGameAction{
 
 	@Override
 	public Boolean solve(Situation situation, Solution solution) {
+                situation.decreasePlayersLeft();
 		return true;
 	}
 	

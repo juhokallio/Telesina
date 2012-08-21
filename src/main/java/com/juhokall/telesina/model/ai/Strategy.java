@@ -21,11 +21,13 @@ public class Strategy {
 	}
 
 	public Strategy(Strategy strategy) {
+            if(strategy != null) {
 		tactics = new HashMap<Integer, Tactic>();
 		Map<Integer, Tactic> alienTactics = strategy.getTactics();
 		for(int n : alienTactics.keySet()){
-			tactics.put(n, alienTactics.get(n));
+			tactics.put(n, alienTactics.get(n).clone());
 		}
+            }
 	}
 
 	public Strategy() {
