@@ -30,7 +30,7 @@ public class StrategyCrawlerTest {
 		Situation situation = new Situation(2);
 		situation.setStreet(2);
 		situation.setPotSize(10);
-		int value = crawler.valueTactic(situation, 1, SolutionType.FOLD);
+		int value = crawler.valueTactic(situation, SolutionType.FOLD);
 		Assert.assertEquals(-10, value);
 	}
 }

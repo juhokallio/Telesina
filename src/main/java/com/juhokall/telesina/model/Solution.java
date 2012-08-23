@@ -9,10 +9,10 @@ package com.juhokall.telesina.model;
  * @author juho
  */
 public class Solution {
-	private HandRange range;	
+
+	private HandRange range;
 	private SolutionType solutionType;
 	private int solutionSize;
-
 
 	public Solution(SolutionType solutionType, int solutionSize) {
 		this.solutionType = solutionType;
@@ -25,14 +25,12 @@ public class Solution {
 
 	public Solution(SolutionType solutionType, Situation situation) {
 		this.solutionType = solutionType;
-		if(solutionType == SolutionType.CALL) {
+		if (solutionType == SolutionType.CALL) {
 			solutionSize = situation.getLastSolution().getSolutionSize();
 		} else {
 			solutionSize = situation.getPotSize();
 		}
 	}
-	
-	
 
 	public HandRange getRange() {
 		return range;
@@ -46,10 +44,6 @@ public class Solution {
 		return solutionType;
 	}
 
-	public void setSolutionType(SolutionType solutionType) {
-		this.solutionType = solutionType;
-	}
-
 	public int getSolutionSize() {
 		return solutionSize;
 	}
@@ -57,6 +51,4 @@ public class Solution {
 	public void setSolutionSize(int solutionSize) {
 		this.solutionSize = solutionSize;
 	}
-
-	
 }

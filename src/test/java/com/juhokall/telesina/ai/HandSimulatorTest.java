@@ -6,9 +6,8 @@ package com.juhokall.telesina.ai;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.juhokall.telesina.model.core.Telesina;
 import com.juhokall.telesina.model.TelesinaHand;
-import com.juhokall.telesina.model.TelesinaValuedCard;
+import com.juhokall.telesina.model.core.Telesina;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,9 +30,8 @@ public class HandSimulatorTest {
 	public void simulatorTest1() {
 		int[] cards = {0, 8, 1, 9};
 		TelesinaHand hand = new TelesinaHand(cards);
-		TelesinaValuedCard valuedCard = handSimulator.getValuedCard(hand);
-		System.out.println("value: " + valuedCard.getValue());
-		Assert.assertTrue(valuedCard.getValue() >= Telesina.TWO_PAIR_VALUE);
+		int value = handSimulator.getValue(hand);
+		Assert.assertTrue(value >= Telesina.TWO_PAIR_VALUE);
 	}
 	@Test
 	public void simulatorTest2() {

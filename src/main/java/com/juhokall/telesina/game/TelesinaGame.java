@@ -10,7 +10,7 @@ import com.juhokall.telesina.model.Solution;
 import java.util.Set;
 
 /**
- *
+ * The core of game structure.
  * @author juho
  */
 @ImplementedBy(TelesinaGameImpl.class)

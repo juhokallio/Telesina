@@ -48,6 +48,6 @@ public class TelesinaAISimple implements TelesinaAI {
 		
 		int rnd = random.nextInt(100);
 		SolutionType solutionType = tactic.getAction(rnd);
-		return new Solution(solutionType);
+		return new Solution(solutionType, situation);
 	}
 }

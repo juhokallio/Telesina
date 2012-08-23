@@ -15,7 +15,10 @@ public class Tactic {
 	private int[] actionPercentages;
 
 	public Tactic(int[] actionPercentages) {
-		this.actionPercentages = actionPercentages;
+		this.actionPercentages = new int[Telesina.ACTION_TYPE_COUNT];
+		for(int i = 0; i < Telesina.ACTION_TYPE_COUNT; i++) {
+			this.actionPercentages[i] = actionPercentages[i];
+		}
 	}
 
 	public Tactic() {
@@ -25,12 +28,14 @@ public class Tactic {
 	public int[] getActionPercentages() {
 		return actionPercentages;
 	}
+	@Override
 	public Tactic clone() {
 		Tactic clone = new Tactic();
 		int[] clonePercentages = new int[actionPercentages.length];
 		for(int i = 0; i < actionPercentages.length; i++) {
 			clonePercentages[i] = actionPercentages[i];
 		}
+		clone.setActionPercentages(clonePercentages);
 		return clone;
 	}
 

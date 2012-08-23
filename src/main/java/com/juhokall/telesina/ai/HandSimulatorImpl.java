@@ -5,9 +5,8 @@
 package com.juhokall.telesina.ai;
 
 import com.google.inject.Inject;
-import com.juhokall.telesina.model.core.Telesina;
 import com.juhokall.telesina.model.TelesinaHand;
-import com.juhokall.telesina.model.TelesinaValuedCard;
+import com.juhokall.telesina.model.core.Telesina;
 import com.juhokall.telesina.rules.TelesinaHandRater;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -50,19 +49,14 @@ public class HandSimulatorImpl implements HandSimulator {
 	}
 
 	@Override
-	public TelesinaValuedCard getValuedCard(TelesinaHand hand) {
+	public int getValue(TelesinaHand hand) {
 		Set simulatedCards = new HashSet<Integer>(playedCards);
 		TelesinaHand newHand = new TelesinaHand(hand);
 		int randomizedCard, randomizedHand;
 		do {
 			randomizedCard = random.nextInt(Telesina.DECK_LENGTH);
 		} while (simulatedCards.contains(randomizedCard));
-		return getValuedCard(hand, randomizedCard);
-	}
-
-	@Override
-	public TelesinaValuedCard getValuedCard(TelesinaHand hand, int nextCard) {
-		return new TelesinaValuedCard(nextCard, getValue(hand, nextCard));
+		return getValue(hand, randomizedCard);
 	}
 
 	@Override

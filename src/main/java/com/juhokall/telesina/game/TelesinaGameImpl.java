@@ -35,7 +35,7 @@ public class TelesinaGameImpl implements TelesinaGame {
 	public Situation solveSituation(Situation s, Solution solution) {
 		Situation nextSituation = s.clone();
 		action.solve(nextSituation, solution);
-		if(nextSituation.getPlayersLeft() == 0) {
+		if(nextSituation.getPlayersLeft() <= 0) {
 			nextSituation.moveToNextStreet();
 		} else {
 			setNextPlayer(nextSituation);		

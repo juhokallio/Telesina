@@ -23,7 +23,8 @@ public class StrategyFactorySimple implements StrategyFactory {
 	public Set<Strategy> getStrategies(Situation situation, Boolean lazyStrategy) {
 		Solution lastSolution = situation.getLastSolution();
 		SolutionType lastSolutionType = lastSolution.getSolutionType();
-		return getStrategies(lastSolutionType, lazyStrategy);
+		Set<Strategy> strategies = getStrategies(lastSolutionType, lazyStrategy);
+		return strategies;
 	}
 
 	@Override
@@ -51,7 +52,9 @@ public class StrategyFactorySimple implements StrategyFactory {
 		Set<Strategy> strategies = new HashSet<Strategy>();
 		for (int[] actionPercentageSet : actionPercentages) {
 			Strategy s = new Strategy(strategy);
-			s.putNewTactic(AISettings.DEFAULT_BREAKPOINTS[breakpointNumber], new Tactic(actionPercentageSet));
+			Tactic nextTactic = new Tactic(actionPercentageSet);
+			s.putNewTactic(nextTactic);
+			
 			if (breakpointNumber < AISettings.DEFAULT_BREAKPOINTS.length - 1) {
 				strategies.addAll(buildStrategies(s, breakpointNumber + 1, breakpoints, actionPercentages));
 			} else {

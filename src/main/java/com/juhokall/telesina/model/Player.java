@@ -12,21 +12,13 @@ import com.juhokall.telesina.model.core.Telesina;
  */
 public class Player {
 
-	private Long id;
 	private int stack;
 	private HandRange range;
 	private TelesinaHand hand;
 	private Solution lastSolution;
-	private Boolean turnLeft;
-	private int number;
-	private PlayerType playerType;
-	private int handRankedFor;
 
 	public Player(int stack) {
-		id = 0l;
-		playerType = PlayerType.VILLAIN;
 		lastSolution = new Solution(SolutionType.CHECK);
-		number = 0;
 		range = new HandRange();
 		hand = new TelesinaHand();
 		this.stack = stack;
@@ -39,20 +31,10 @@ public class Player {
 	@Override
 	public Player clone() {
 		Player p = new Player(stack);
-		p.setId(id);
 		p.setHand(hand);
 		p.setLastSolution(lastSolution);
-		p.setNumber(number);
-		p.setPlayerType(playerType);
 		p.setRange(range);
-		p.setTurnLeft(turnLeft);
 		return p;
-	}
-	public int getNumber() {
-		return number;
-	}
-	public void setNumber(int number) {
-		this.number = number;
 	}
 
 	public int removeFromStack(int amount) {
@@ -70,36 +52,12 @@ public class Player {
 		stack += amount;
 	}
 
-	public PlayerType getPlayerType() {
-		return playerType;
-	}
-
-	public void setPlayerType(PlayerType playerType) {
-		this.playerType = playerType;
-	}
-
 	public Solution getLastSolution() {
 		return lastSolution;
 	}
 
 	public void setLastSolution(Solution lastSolution) {
 		this.lastSolution = lastSolution;
-	}
-
-	public Boolean getTurnLeft() {
-		return turnLeft;
-	}
-
-	public void setTurnLeft(Boolean turnLeft) {
-		this.turnLeft = turnLeft;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public int getStack() {
