@@ -108,6 +108,12 @@ public class Situation {
 	}
 
 	public void setActivePlayer(Player activePlayer) {
+		for(int i = 0; i < playerCount; i++) {
+			Player p = players.get(i);
+			if(p == activePlayer) {
+				activePlayerId = i;
+			}
+		}
 		this.activePlayer = activePlayer;
 	}
 

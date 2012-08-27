@@ -40,6 +40,9 @@ public class TelesinaHand {
 		this.cards = cards;
 		numberOfCardsDealt = handLength;
 	}
+	public int getCard(int index) {
+		return cards[index];
+	}
 
 	public int[] getCards() {
 		return cards;

@@ -17,6 +17,9 @@ public class TelesinaHandRaterImpl implements TelesinaHandRater {
 
 	@Override
 	public int getTelesinaHandValue(TelesinaHand telesinaHand) {
+		if(telesinaHand.getNumberOfCardsDealt() == 1) {
+			return getHighcardValue(telesinaHand.getCard(0));
+		}
 		int[] hand = new int[telesinaHand.getNumberOfCardsDealt()];
 		for(int i = 0; i < telesinaHand.getNumberOfCardsDealt(); i++) {
 			hand[i] = telesinaHand.getCards()[i];
