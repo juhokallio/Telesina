@@ -30,6 +30,7 @@ public class TelesinaRangeAnalyzerImpl implements TelesinaRangeAnalyzer {
 	
 	@Override
 	public HandRange[] getRanges(Situation situation) {
+		
 		Map<Integer, Player> players = situation.getPlayers();
 		HandRange[] ranges = new HandRange[situation.getPlayerCount()];
 		for (Player player : players.values()) {
@@ -55,5 +56,14 @@ public class TelesinaRangeAnalyzerImpl implements TelesinaRangeAnalyzer {
 			ranges[i] = range;
 		}
 		return ranges;
+	}
+
+	@Override
+	public void setRanges(Situation situation) {
+		HandRange[] ranges = getRanges(situation);
+		int i = 0;
+		for(Player player : situation.getPlayers().values()) {
+			player.setRange(ranges[i++]);	
+		}
 	}
 }

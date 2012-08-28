@@ -14,7 +14,8 @@ public enum SolutionType {
 	CALL (2), 
 	CHECK (3), 
 	BET (1), 
-	RAISE (5);
+	RAISE (5),
+	TAKE_ANTES (6);
 
 	private int orderNumber;
 

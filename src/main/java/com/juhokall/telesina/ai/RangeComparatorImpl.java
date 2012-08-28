@@ -13,6 +13,7 @@ import java.util.List;
  * @author juho
  */
 public class RangeComparatorImpl implements RangeComparator {
+	private static int INCREMENT_COUNT = 20;
 
 	@Override
 	public double getEquity(HandRange range1, HandRange range2) {
@@ -20,14 +21,17 @@ public class RangeComparatorImpl implements RangeComparator {
 		List<Integer> values1 = range1.getValues();
 		double beatenValues = new Double(0);
 		int index = 0;
-		for (int value : values1) {
-			while (index < values2.size() && value > values2.get(index)) {
+		int increment1 = values1.size() / INCREMENT_COUNT;
+		int increment2 = values1.size() / INCREMENT_COUNT;
+		
+		for (int i = 0; i < INCREMENT_COUNT; i++) {
+			while (index < INCREMENT_COUNT && values1.get(increment1 * i) > values2.get(index * increment2)) {
 				index++;
 			}
 			beatenValues += index;
 		}
-		double averageBeatenValues = beatenValues / values1.size();
-		double percentage = averageBeatenValues / values2.size();
+		double averageBeatenValues = beatenValues / INCREMENT_COUNT;
+		double percentage = averageBeatenValues / INCREMENT_COUNT;
 		return percentage;
 	}
 }

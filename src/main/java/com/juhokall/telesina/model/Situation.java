@@ -40,7 +40,7 @@ public class Situation {
 		this.playerCount = playerCount;
 		activePlayer = players.get(0);
 		activePlayerId = 0;
-		potSize = playerCount * Telesina.DEFAULT_ANTE;
+		potSize = 0;
 		street = 0;
 		lastSolution = new Solution(SolutionType.CHECK);
 		playersLeft = playerCount;
@@ -89,6 +89,25 @@ public class Situation {
 
 	public void setPlayersLeft(int playersLeft) {
 		this.playersLeft = playersLeft;
+	}
+	public Situation subSituation(int activePercentageStart, int activePercentageEnd) {
+		Situation clone = this.clone();
+		Player player = clone.getActivePlayer();
+		HandRange range = player.getRange();
+		List<Integer> values = range.getValues();
+		int valuesLength = values.size();
+		int start = valuesLength * activePercentageStart / 100;
+		int end = valuesLength * activePercentageEnd / 100;
+		range.setValues(values.subList(start, end));
+		return clone;
+	}
+	public void setActivePlayersRanges(int activePercentageStart, int activePercentageEnd) {
+		HandRange range = activePlayer.getRange();
+		List<Integer> values = range.getValues();
+		int valuesLength = values.size();
+		int start = valuesLength * activePercentageStart / 100;
+		int end = valuesLength * activePercentageEnd / 100;
+		range.setValues(values.subList(start, end));
 	}
 
 	public void setPlayers(Map<Integer, Player> players) {

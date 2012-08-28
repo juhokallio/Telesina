@@ -33,7 +33,7 @@ public class Player {
 		Player p = new Player(stack);
 		p.setHand(hand);
 		p.setLastSolution(lastSolution);
-		p.setRange(range);
+		p.setRange(range.clone());
 		return p;
 	}
 

@@ -24,6 +24,7 @@ import java.util.Set;
  */
 public class StrategyCrawlerImpl implements StrategyCrawler {
 
+	private final static int MAX_DEPTH = 2;
 	private StrategyFactory strategyFactory;
 	private TelesinaGame game;
 	private RangeComparator rangeComparator;
@@ -37,29 +38,46 @@ public class StrategyCrawlerImpl implements StrategyCrawler {
 
 	@Override
 	public void crawlStrategy(Situation situation, Strategy strategy) {
-		int value = 0;
-		double actionPercentage, rangeLimit, probability;
+		crawlStrategy(situation, strategy, 0);
+	}
+
+	@Override
+	public Strategy crawlStrategySet(Situation situation, Set<Strategy> strategies) {
+		return crawlStrategySet(situation, strategies, 0);
+	}
+
+	@Override
+	public int valueTactic(Situation situation, SolutionType tacticType) {
+		return valueTactic(situation, tacticType, 0, 0, 100);
+	}
+
+	public void crawlStrategy(Situation situation, Strategy strategy, int depth) {
+		int value = 0, rangeLimit, rangeBottom;
+		double actionPercentage, probability;
 		List<Tactic> tactics = strategy.getTactics();
 		Tactic tactic;
 		for (int rangeSection = 0; rangeSection < AISettings.STRATEGY_CANDIDATE_COUNT; rangeSection++) {
-			rangeLimit = (double) AISettings.DEFAULT_BREAKPOINTS[rangeSection];
+			rangeLimit = AISettings.DEFAULT_BREAKPOINTS[rangeSection];
 			tactic = tactics.get(rangeSection);
 			for (int actionIndex = 0; actionIndex < Telesina.ACTION_TYPE_COUNT; actionIndex++) {
 				actionPercentage = (double) tactic.getActionPercentages()[actionIndex];
 				if (actionPercentage > 0) {
 					probability = rangeLimit * actionPercentage / 100;
-					value += probability * valueTactic(situation, Telesina.SOLUTION_TYPES[actionIndex]);
+					rangeBottom = rangeLimit - 25;
+					if (rangeBottom < 0) {
+						rangeBottom = 0;
+					}
+					value += probability * valueTactic(situation, Telesina.SOLUTION_TYPES[actionIndex], depth, rangeBottom, rangeLimit);
 				}
 			}
 		}
 		strategy.setEstimatedValue(value);
 	}
 
-	@Override
-	public Strategy crawlStrategySet(Situation situation, Set<Strategy> strategies) {
+	public Strategy crawlStrategySet(Situation situation, Set<Strategy> strategies, int depth) {
 		Strategy bestStrategy = null;
 		for (Strategy strategy : strategies) {
-			crawlStrategy(situation, strategy);
+			crawlStrategy(situation, strategy, depth);
 			if (bestStrategy == null || strategy.getEstimatedValue() > bestStrategy.getEstimatedValue()) {
 				bestStrategy = strategy;
 			}
@@ -67,17 +85,17 @@ public class StrategyCrawlerImpl implements StrategyCrawler {
 		return bestStrategy;
 	}
 
-	@Override
-	public int valueTactic(Situation situation, SolutionType tacticType) {
+	public int valueTactic(Situation situation, SolutionType tacticType, int depth, int rangeBottom, int rangeTop) {
 		int value = 0;
 		if (tacticType == SolutionType.FOLD) {
 			value -= situation.getPotSize();
 		} else {
 			Solution solution = new Solution(tacticType, situation);
 			Situation nextSituation = game.solveSituation(situation, solution);
-			if (situationHasPlayLeft(nextSituation)) {
+			nextSituation.setActivePlayersRanges(rangeBottom, rangeTop);
+			if (situationHasPlayLeft(nextSituation) && depth < MAX_DEPTH) {
 				Set<Strategy> nextStrategies = strategyFactory.getStrategies(nextSituation, true);
-				Strategy bestStrategy = crawlStrategySet(nextSituation, nextStrategies);
+				Strategy bestStrategy = crawlStrategySet(nextSituation, nextStrategies, depth + 1);
 				int nextStrategyValue = 0;
 				if (bestStrategy != null) {
 					nextStrategyValue = bestStrategy.getEstimatedValue();

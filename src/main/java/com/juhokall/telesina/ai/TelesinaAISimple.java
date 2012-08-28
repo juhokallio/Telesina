@@ -24,18 +24,22 @@ public class TelesinaAISimple implements TelesinaAI {
 	private StrategyFactory strategyFactory;
 	private StrategyCrawler crawler;
 	private HandSimulator handSimulator;
+	private TelesinaRangeAnalyzer rangeAnalyzer;
 	private Random random;
+	
 
 	@Inject
-	public TelesinaAISimple(StrategyFactory strategyFactory, StrategyCrawler crawler, HandSimulator handSimulator) {
+	public TelesinaAISimple(StrategyFactory strategyFactory, StrategyCrawler crawler, HandSimulator handSimulator, TelesinaRangeAnalyzer rangeAnalyzer) {
 		this.strategyFactory = strategyFactory;
 		this.crawler = crawler;
 		this.handSimulator = handSimulator;
+		this.rangeAnalyzer = rangeAnalyzer;
 		random = new Random();
 	}
 
 	@Override
 	public Solution getSolution(Situation situation, int holeCard) {
+		rangeAnalyzer.setRanges(situation);	
 		Set<Strategy> strategies = strategyFactory.getStrategies(situation, true);
 		Strategy bestStrategy = crawler.crawlStrategySet(situation, strategies);
 		Player hero = situation.getActivePlayer();

@@ -25,6 +25,7 @@ public class TelesinaGameActionSolver implements TelesinaGameAction {
 		SOLUTION_METHODS.put(SolutionType.CHECK, new Check());
 		SOLUTION_METHODS.put(SolutionType.FOLD, new Fold());
 		SOLUTION_METHODS.put(SolutionType.RAISE, new Raise());
+		SOLUTION_METHODS.put(SolutionType.TAKE_ANTES, new TakeAntes());
 	}
 
 	@Override

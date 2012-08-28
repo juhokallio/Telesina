@@ -19,4 +19,5 @@ public interface TelesinaRangeAnalyzer {
  * @author juho
  */
 	public HandRange[] getRanges(Situation situation);
+	public void setRanges(Situation situation);
 }

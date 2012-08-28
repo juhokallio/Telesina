@@ -78,8 +78,8 @@ public class PlayableTelesinaGameImpl extends TelesinaGameImpl implements Playab
 		for (Player player : situation.getPlayers().values()) {
 			TelesinaHand hand = player.getHand();
 			int handStrength = handRater.getTelesinaHandValue(hand);
-			System.out.println(handStrength);
 			if (handStrength > strongestHand) {
+				strongestHand = handStrength;
 				situation.setActivePlayer(player);
 			}
 		}
