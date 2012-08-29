@@ -162,6 +162,7 @@ public class Situation {
 
 	public void setActivePlayer(int activePlayerId) {
 		this.activePlayer = players.get(activePlayerId);
+		this.activePlayerId = activePlayerId;
 	}
 
 	public void removePlayer(int playerNumber) {

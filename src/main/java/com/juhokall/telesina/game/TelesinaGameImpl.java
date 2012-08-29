@@ -30,23 +30,24 @@ public class TelesinaGameImpl implements TelesinaGame {
 		this.situation = new Situation(2);
 	}
 
-	
 	@Override
 	public Situation solveSituation(Situation s, Solution solution) {
 		Situation nextSituation = s.clone();
 		action.solve(nextSituation, solution);
-		if(nextSituation.getPlayersLeft() <= 0) {
+		if (nextSituation.getPlayerCount() <= 1) {
+		} else if (nextSituation.getPlayersLeft() <= 0) {
 			nextSituation.moveToNextStreet();
 		} else {
-			setNextPlayer(nextSituation);		
+			setNextPlayer(nextSituation);
 			nextSituation.setLastSolution(solution);
-		} 		
+		}
 		return nextSituation;
 	}
-	private void setNextPlayer(Situation situation) {
-		situation.setActivePlayer(situation.getNonActivePlayers()[0]);
-	}
 
+	private void setNextPlayer(Situation situation) {
+		Player nextActivePlayer = situation.getNonActivePlayers()[0];
+		situation.setActivePlayer(nextActivePlayer);
+	}
 
 	@Override
 	public void dealCardForPlayer(int card, int playerNumber) {
@@ -74,11 +75,9 @@ public class TelesinaGameImpl implements TelesinaGame {
 	public void setNewGame(Situation situation) {
 		this.situation = situation;
 	}
-	
 
 	@Override
 	public Set getDeck() {
 		return deck;
 	}
-	
 }
