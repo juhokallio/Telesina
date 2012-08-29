@@ -7,6 +7,7 @@ package com.juhokall.telesina.game.action;
 import com.juhokall.telesina.model.Player;
 import com.juhokall.telesina.model.Situation;
 import com.juhokall.telesina.model.Solution;
+import com.juhokall.telesina.model.SolutionType;
 import com.juhokall.telesina.model.core.Telesina;
 
 /**
@@ -23,6 +24,9 @@ public class Raise implements TelesinaGameAction {
 		call.solve(situation, solution);
 		if (betSize >= Telesina.DEFAULT_ANTE && betSize <= situation.getPotSize()) {
 			Player player = situation.getActivePlayer();
+			if(situation.getLastSolution().getSolutionType() == SolutionType.TAKE_ANTES) {
+				betSize -= situation.getLastSolution().getSolutionSize();
+			}
 			player.removeFromStack(betSize);
 			situation.addToPot(betSize);
 			return true;

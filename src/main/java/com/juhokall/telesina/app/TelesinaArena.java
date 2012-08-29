@@ -47,13 +47,14 @@ public class TelesinaArena {
 				game.dealNextStreet();
 				printStatus();
 			}
-			int activePlayer = game.getActivePlayer();
-			if (activePlayer == HERO) {
+			printLastAction();
+			if (situation.getActivePlayerId() == HERO) {
 				processHeroTurn();
 			} else {
 				processVillainTurn();
 			}
-		} while (situation.getPlayerCount() > 0 && situation.getStreet() < Telesina.STREET_COUNT);
+		} while (situation.getPlayerCount() > 1 && situation.getStreet() <= Telesina.STREET_COUNT);
+		
 	}
 
 	private static void printStatus() {
@@ -63,6 +64,13 @@ public class TelesinaArena {
 		printPlayersStack(HERO);
 		printPotSize();
 		System.out.println("");
+	}
+	private static void printLastAction() {
+		Solution lastSolution = situation.getLastSolution();
+		if(lastSolution.getSolutionType() == SolutionType.BET || lastSolution.getSolutionType() == SolutionType.RAISE || lastSolution.getSolutionType() == SolutionType.TAKE_ANTES) {
+			System.out.println(lastSolution.getSolutionSize() + "$ to call.");
+		}	
+		
 	}
 
 	private static void processHeroTurn() {
@@ -90,6 +98,7 @@ public class TelesinaArena {
 			return false;
 		}
 		situation = game.solveSituation(situation, solution);
+		printSolution(solution);
 		return true;
 	}
 
@@ -107,13 +116,17 @@ public class TelesinaArena {
 	private static void processVillainTurn() {
 		System.out.println("It is opponent's turn.");
 		Solution solution = ai.getSolution(situation, villainsHoleCard);
+		situation = game.solveSituation(situation, solution);
+		printSolution(solution);
+	}
+
+	private static void printSolution(Solution solution) {
 		SolutionType solutionType = solution.getSolutionType();
 		String output = solutionType.name();
 		if (solutionType == SolutionType.BET || solutionType == SolutionType.RAISE) {
 			output += " " + solution.getSolutionSize() + "$";
 		}
 		System.out.println(output);
-		situation = game.solveSituation(situation, solution);
 	}
 
 	private static void printHeroHand(int holeCard) {

@@ -23,12 +23,14 @@ public class TelesinaRangeAnalyzerTest {
 
 	private TelesinaGame game;
 	private TelesinaRangeAnalyzer rangeAnalyzer;
+	private RangeComparator rangeComparator;
 
 	@Before
 	public void initialize() {
 		Injector injector = Guice.createInjector();
 		rangeAnalyzer = injector.getInstance(TelesinaRangeAnalyzer.class);
 		game = injector.getInstance(TelesinaGame.class);
+		rangeComparator = injector.getInstance(RangeComparator.class);
 	}
 
 	@Test
@@ -45,5 +47,17 @@ public class TelesinaRangeAnalyzerTest {
 		List<Integer> values = ranges[0].getValues();
 		Assert.assertTrue(values.get(0) < values.get(values.size() - 1));
 		Assert.assertEquals(AISettings.RANGE_ITERATIONS, values.size());
+	}
+	@Test
+	public void analyzerTest2() {
+		int playerCount = 2;
+		game.setNewGame(playerCount);
+		game.dealCardForPlayer(3, 0);
+		game.dealCardForPlayer(4, 1);
+		Situation situation = game.getSituation();
+		HandRange[] ranges = rangeAnalyzer.getRanges(situation);
+		double equity = rangeComparator.getEquity(ranges[0], ranges[1]);
+		System.out.println(equity);
+		Assert.assertTrue(equity < 0.5);
 	}
 }

@@ -27,6 +27,14 @@ public class Solution {
 		this.solutionType = solutionType;
 		if (solutionType == SolutionType.CALL) {
 			solutionSize = situation.getLastSolution().getSolutionSize();
+		} else if (solutionType == SolutionType.RAISE) {
+			int lastSolutionSize = situation.getLastSolution().getSolutionSize();
+			int potAfterCall = situation.getPotSize() + lastSolutionSize;
+			if (situation.getLastSolution().solutionType == SolutionType.BET) {
+				solutionSize = potAfterCall;
+			} else {
+				solutionSize = potAfterCall + lastSolutionSize;
+			}
 		} else {
 			solutionSize = situation.getPotSize();
 		}

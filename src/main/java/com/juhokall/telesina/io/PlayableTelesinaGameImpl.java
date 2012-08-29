@@ -12,6 +12,7 @@ import com.juhokall.telesina.model.Situation;
 import com.juhokall.telesina.model.TelesinaHand;
 import com.juhokall.telesina.model.core.Telesina;
 import com.juhokall.telesina.rules.TelesinaHandRater;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
@@ -48,14 +49,11 @@ public class PlayableTelesinaGameImpl extends TelesinaGameImpl implements Playab
 
 	@Override
 	public void dealNextStreet() {
-		int cardsForTheStreet = Telesina.CARDS_DEALT_ON_STREET[street];
 		int card;
 		if (street < Telesina.NORMAL_STREET_COUNT) {
 			for (int playerId : situation.getPlayerIds()) {
-				for (int i = 0; i < cardsForTheStreet; i++) {
 					card = dealCard();
 					super.dealCardForPlayer(card, playerId);
-				}
 			}
 		} else if (street == Telesina.NORMAL_STREET_COUNT) {
 			card = random.nextInt(deck.size());
@@ -65,6 +63,7 @@ public class PlayableTelesinaGameImpl extends TelesinaGameImpl implements Playab
 		} else {
 		}
 		setActivePlayer(situation);
+		situation.setPlayersLeft(situation.getPlayerCount());
 		street++;
 	}
 
@@ -75,12 +74,12 @@ public class PlayableTelesinaGameImpl extends TelesinaGameImpl implements Playab
 
 	private void setActivePlayer(Situation situation) {
 		int strongestHand = 0;
-		for (Player player : situation.getPlayers().values()) {
-			TelesinaHand hand = player.getHand();
+		for (int playerId : situation.getPlayerIds()){
+			TelesinaHand hand = situation.getPlayer(playerId).getHand();
 			int handStrength = handRater.getTelesinaHandValue(hand);
 			if (handStrength > strongestHand) {
 				strongestHand = handStrength;
-				situation.setActivePlayer(player);
+				situation.setActivePlayer(playerId);
 			}
 		}
 	}

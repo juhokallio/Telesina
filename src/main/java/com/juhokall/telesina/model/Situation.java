@@ -22,7 +22,6 @@ public class Situation {
 	private int potSize;
 	private int activePlayerId;
 	private int playerCount;
-	private Player activePlayer;
 	private Solution lastSolution;
 	private int playersLeft;
 
@@ -38,7 +37,6 @@ public class Situation {
 			playerIds.add(i);
 		}
 		this.playerCount = playerCount;
-		activePlayer = players.get(0);
 		activePlayerId = 0;
 		potSize = 0;
 		street = 0;
@@ -72,7 +70,6 @@ public class Situation {
 		}
 		s.setPlayerIds(ids);
 		s.setPlayers(ps);
-		s.setActivePlayer(activePlayer.clone());
 		s.setActivePlayerId(activePlayerId);
 		s.setPlayersLeft(playersLeft);
 		return s;
@@ -85,6 +82,7 @@ public class Situation {
 	}
 	public void moveToNextStreet() {
 		street++;
+		playersLeft = playerCount;
 	}
 
 	public void setPlayersLeft(int playersLeft) {
@@ -102,7 +100,7 @@ public class Situation {
 		return clone;
 	}
 	public void setActivePlayersRanges(int activePercentageStart, int activePercentageEnd) {
-		HandRange range = activePlayer.getRange();
+		HandRange range = getActivePlayer().getRange();
 		List<Integer> values = range.getValues();
 		int valuesLength = values.size();
 		int start = valuesLength * activePercentageStart / 100;
@@ -126,16 +124,6 @@ public class Situation {
 		this.playerCount = playerCount;
 	}
 
-	public void setActivePlayer(Player activePlayer) {
-		for(int i = 0; i < playerCount; i++) {
-			Player p = players.get(i);
-			if(p == activePlayer) {
-				activePlayerId = i;
-			}
-		}
-		this.activePlayer = activePlayer;
-	}
-
 	public Map<Integer, Player> getPlayers() {
 		return players;
 	}
@@ -157,11 +145,10 @@ public class Situation {
 	}
 
 	public Player getActivePlayer() {
-		return activePlayer;
+		return players.get(activePlayerId);
 	}
 
 	public void setActivePlayer(int activePlayerId) {
-		this.activePlayer = players.get(activePlayerId);
 		this.activePlayerId = activePlayerId;
 	}
 
@@ -200,9 +187,20 @@ public class Situation {
 		int i = 0;
 		for(int playerNumber : players.keySet()) {
 			if(playerNumber != activePlayerId) {
-				naPlayers[i++] = players.get(playerNumber);
+				naPlayers[i++] = getPlayer(playerNumber);
 			}
 		}
 		return naPlayers;
 	}
+	public int[] getNonActivePlayerIds() {
+		int[] naPlayers = new int[playerCount - 1];
+		int i = 0;
+		for(int playerNumber : players.keySet()) {
+			if(playerNumber != activePlayerId) {
+				naPlayers[i++] = playerNumber;
+			}
+		}
+		return naPlayers;
+	}
+
 }

@@ -38,20 +38,20 @@ public class StrategyCrawlerImpl implements StrategyCrawler {
 
 	@Override
 	public void crawlStrategy(Situation situation, Strategy strategy) {
-		crawlStrategy(situation, strategy, 0);
+		crawlStrategy(situation, strategy, 0, 1);
 	}
 
 	@Override
 	public Strategy crawlStrategySet(Situation situation, Set<Strategy> strategies) {
-		return crawlStrategySet(situation, strategies, 0);
+		return crawlStrategySet(situation, strategies, 0, 1);
 	}
 
 	@Override
 	public int valueTactic(Situation situation, SolutionType tacticType) {
-		return valueTactic(situation, tacticType, 0, 0, 100);
+		return (int) valueTactic(situation, tacticType, 0, 0, 100, 1);
 	}
 
-	public void crawlStrategy(Situation situation, Strategy strategy, int depth) {
+	public void crawlStrategy(Situation situation, Strategy strategy, int depth, double scenarioProbability) {
 		int value = 0, rangeLimit, rangeBottom;
 		double actionPercentage, probability;
 		List<Tactic> tactics = strategy.getTactics();
@@ -62,22 +62,22 @@ public class StrategyCrawlerImpl implements StrategyCrawler {
 			for (int actionIndex = 0; actionIndex < Telesina.ACTION_TYPE_COUNT; actionIndex++) {
 				actionPercentage = (double) tactic.getActionPercentages()[actionIndex];
 				if (actionPercentage > 0) {
-					probability = rangeLimit * actionPercentage / 100;
+					probability = 25.0 / 100.0 * actionPercentage / 100.0;
 					rangeBottom = rangeLimit - 25;
 					if (rangeBottom < 0) {
 						rangeBottom = 0;
 					}
-					value += probability * valueTactic(situation, Telesina.SOLUTION_TYPES[actionIndex], depth, rangeBottom, rangeLimit);
+					value += valueTactic(situation, Telesina.SOLUTION_TYPES[actionIndex], depth, rangeBottom, rangeLimit, probability * scenarioProbability);
 				}
 			}
 		}
 		strategy.setEstimatedValue(value);
 	}
 
-	public Strategy crawlStrategySet(Situation situation, Set<Strategy> strategies, int depth) {
+	public Strategy crawlStrategySet(Situation situation, Set<Strategy> strategies, int depth, double scenarioProbability) {
 		Strategy bestStrategy = null;
 		for (Strategy strategy : strategies) {
-			crawlStrategy(situation, strategy, depth);
+			crawlStrategy(situation, strategy, depth, scenarioProbability);
 			if (bestStrategy == null || strategy.getEstimatedValue() > bestStrategy.getEstimatedValue()) {
 				bestStrategy = strategy;
 			}
@@ -85,7 +85,7 @@ public class StrategyCrawlerImpl implements StrategyCrawler {
 		return bestStrategy;
 	}
 
-	public int valueTactic(Situation situation, SolutionType tacticType, int depth, int rangeBottom, int rangeTop) {
+	public double valueTactic(Situation situation, SolutionType tacticType, int depth, int rangeBottom, int rangeTop, double scenarioProbability) {
 		int value = 0;
 		if (tacticType == SolutionType.FOLD) {
 			value -= situation.getPotSize();
@@ -95,17 +95,17 @@ public class StrategyCrawlerImpl implements StrategyCrawler {
 			nextSituation.setActivePlayersRanges(rangeBottom, rangeTop);
 			if (situationHasPlayLeft(nextSituation) && depth < MAX_DEPTH) {
 				Set<Strategy> nextStrategies = strategyFactory.getStrategies(nextSituation, true);
-				Strategy bestStrategy = crawlStrategySet(nextSituation, nextStrategies, depth + 1);
+				Strategy bestStrategy = crawlStrategySet(nextSituation, nextStrategies, depth + 1, scenarioProbability);
 				int nextStrategyValue = 0;
 				if (bestStrategy != null) {
 					nextStrategyValue = bestStrategy.getEstimatedValue();
 				}
-				value -= nextStrategyValue + solution.getSolutionSize();
+				value -= nextStrategyValue;  
 			} else {
-				value += valueRanges(situation) - solution.getSolutionSize();
+				value += valueSolution(situation, solution.getSolutionSize());
 			}
 		}
-		return value;
+		return scenarioProbability * value;
 	}
 
 	private boolean situationHasPlayLeft(Situation situation) {
@@ -127,8 +127,14 @@ public class StrategyCrawlerImpl implements StrategyCrawler {
 	}
 
 	private int valueRanges(Situation s) {
-		Player hero = s.getActivePlayer(), villain = s.getNonActivePlayers()[0];
+		return valueSolution(s, 0);
+	}
+
+	private int valueSolution(Situation s, int solutionSize) {
+
+		Player hero = s.getActivePlayer();
+		Player villain = s.getNonActivePlayers()[0];
 		double rangeEquity = rangeComparator.getEquity(hero.getRange(), villain.getRange());
-		return (int) (rangeEquity * s.getPotSize());
+		return (int) (rangeEquity * (s.getPotSize() + solutionSize)) - solutionSize;
 	}
 }

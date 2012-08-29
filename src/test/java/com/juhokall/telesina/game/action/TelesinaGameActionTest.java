@@ -33,6 +33,7 @@ public class TelesinaGameActionTest {
 	public void betTest1() {
 		int playerCount = 2, betSize = 2;
 		Situation situation = new Situation(playerCount);
+		situation.setPotSize(playerCount * Telesina.DEFAULT_ANTE);
 		Solution solution = new Solution(SolutionType.BET, betSize);
 		action.solve(situation, solution);
 		Assert.assertEquals(playerCount * Telesina.DEFAULT_ANTE + betSize, situation.getPotSize());

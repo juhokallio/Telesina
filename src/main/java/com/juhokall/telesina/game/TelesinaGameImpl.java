@@ -9,6 +9,7 @@ import com.juhokall.telesina.game.action.TelesinaGameAction;
 import com.juhokall.telesina.model.Player;
 import com.juhokall.telesina.model.Situation;
 import com.juhokall.telesina.model.Solution;
+import com.juhokall.telesina.model.SolutionType;
 import com.juhokall.telesina.model.core.Telesina;
 import com.juhokall.telesina.model.TelesinaHand;
 import java.util.HashSet;
@@ -39,13 +40,15 @@ public class TelesinaGameImpl implements TelesinaGame {
 			nextSituation.moveToNextStreet();
 		} else {
 			setNextPlayer(nextSituation);
-			nextSituation.setLastSolution(solution);
+			if (nextSituation.getLastSolution().getSolutionType() != SolutionType.TAKE_ANTES || solution.getSolutionType() != SolutionType.CALL) {
+				nextSituation.setLastSolution(solution);
+			}
 		}
 		return nextSituation;
 	}
 
 	private void setNextPlayer(Situation situation) {
-		Player nextActivePlayer = situation.getNonActivePlayers()[0];
+		int nextActivePlayer = situation.getNonActivePlayerIds()[0];
 		situation.setActivePlayer(nextActivePlayer);
 	}
 
