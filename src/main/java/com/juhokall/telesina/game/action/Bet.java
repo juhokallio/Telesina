@@ -21,6 +21,7 @@ public class Bet implements TelesinaGameAction {
 		if (betSize >= Telesina.DEFAULT_ANTE && betSize <= situation.getPotSize()) {
 			Player player = situation.getActivePlayer();
 			player.removeFromStack(betSize);
+			situation.decreasePlayersLeft();
 			situation.addToPot(betSize);
 			return true;
 		} else {

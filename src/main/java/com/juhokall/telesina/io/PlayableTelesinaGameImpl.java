@@ -48,7 +48,7 @@ public class PlayableTelesinaGameImpl extends TelesinaGameImpl implements Playab
 	}
 
 	@Override
-	public void dealNextStreet() {
+	public void dealNextStreet(Situation situation) {
 		int card;
 		if (street < Telesina.NORMAL_STREET_COUNT) {
 			for (int playerId : situation.getPlayerIds()) {

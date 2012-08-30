@@ -15,7 +15,7 @@ import com.juhokall.telesina.model.TelesinaHand;
  */
 @ImplementedBy(PlayableTelesinaGameImpl.class)
 public interface PlayableTelesinaGame extends TelesinaGame {
- 	public void dealNextStreet();	
+ 	public void dealNextStreet(Situation situation);	
 	public int dealHoleCard(int playerNumber);
 	public int[] getPlayersCards(int playerNumber);
 	public TelesinaHand getPlayersHand(int playerNumber);

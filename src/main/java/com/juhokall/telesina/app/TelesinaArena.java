@@ -37,14 +37,14 @@ public class TelesinaArena {
 
 	public static void main(String[] args) {
 		initialize();
-		game.dealNextStreet();
+		game.dealNextStreet(situation);
 		herosHoleCard = game.dealHoleCard(HERO);
 		takeAntes();
 		System.out.println("");
 		printStatus();
 		do {
 			if (situation.getStreet() > street) {
-				game.dealNextStreet();
+				game.dealNextStreet(situation);
 				printStatus();
 			}
 			printLastAction();
@@ -94,7 +94,10 @@ public class TelesinaArena {
 			solution = new Solution(SolutionType.BET, situation);
 		} else if (decision.startsWith("f")) {
 			solution = new Solution(SolutionType.FOLD);
+		} else if(decision.startsWith("r")) {
+			solution = new Solution(SolutionType.RAISE, situation);
 		} else {
+			System.out.println("Not a valid play. (b=bet, c={check, call}, f=fold, r=raise)");
 			return false;
 		}
 		situation = game.solveSituation(situation, solution);
