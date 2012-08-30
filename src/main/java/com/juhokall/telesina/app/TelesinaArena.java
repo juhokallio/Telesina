@@ -44,6 +44,7 @@ public class TelesinaArena {
 		printStatus();
 		do {
 			if (situation.getStreet() > street) {
+				street++;
 				game.dealNextStreet(situation);
 				printStatus();
 			}
@@ -54,7 +55,7 @@ public class TelesinaArena {
 				processVillainTurn();
 			}
 		} while (situation.getPlayerCount() > 1 && situation.getStreet() <= Telesina.STREET_COUNT);
-		
+
 	}
 
 	private static void printStatus() {
@@ -65,12 +66,13 @@ public class TelesinaArena {
 		printPotSize();
 		System.out.println("");
 	}
+
 	private static void printLastAction() {
 		Solution lastSolution = situation.getLastSolution();
-		if(lastSolution.getSolutionType() == SolutionType.BET || lastSolution.getSolutionType() == SolutionType.RAISE || lastSolution.getSolutionType() == SolutionType.TAKE_ANTES) {
+		if (lastSolution.getSolutionType() == SolutionType.BET || lastSolution.getSolutionType() == SolutionType.RAISE || lastSolution.getSolutionType() == SolutionType.TAKE_ANTES) {
 			System.out.println(lastSolution.getSolutionSize() + "$ to call.");
-		}	
-		
+		}
+
 	}
 
 	private static void processHeroTurn() {
@@ -83,26 +85,38 @@ public class TelesinaArena {
 
 	private static boolean processDecision(String decision) {
 		Solution solution;
+		SolutionType lastSolution = situation.getLastSolution().getSolutionType();
 		if (decision.equals("c")) {
-			SolutionType lastSolution = situation.getLastSolution().getSolutionType();
 			if (lastSolution == SolutionType.CHECK) {
 				solution = new Solution(SolutionType.CHECK);
 			} else {
 				solution = new Solution(SolutionType.CALL, situation);
 			}
-		} else if (decision.startsWith("b")) {
+		} else if (decision.startsWith("b") && !lastWasActive(lastSolution)) {
 			solution = new Solution(SolutionType.BET, situation);
-		} else if (decision.startsWith("f")) {
+		} else if (decision.startsWith("f") && lastWasActive(lastSolution)) {
 			solution = new Solution(SolutionType.FOLD);
-		} else if(decision.startsWith("r")) {
+		} else if (decision.startsWith("r") && lastWasActive(lastSolution)) {
 			solution = new Solution(SolutionType.RAISE, situation);
-		} else {
-			System.out.println("Not a valid play. (b=bet, c={check, call}, f=fold, r=raise)");
+		} else if (lastWasActive(lastSolution)) {
+			System.out.println("Not a valid play. (c=call, f=fold, r=raise)");
 			return false;
+		} else {
+			System.out.println("Not a valid play. (b=bet, c=check)");
+			return false;
+			
 		}
 		situation = game.solveSituation(situation, solution);
 		printSolution(solution);
 		return true;
+	}
+
+	private static boolean lastWasActive(SolutionType last) {
+		if (last == SolutionType.CALL || last == SolutionType.CHECK) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	private static void takeAntes() {

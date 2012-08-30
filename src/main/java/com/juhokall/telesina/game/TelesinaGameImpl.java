@@ -10,8 +10,8 @@ import com.juhokall.telesina.model.Player;
 import com.juhokall.telesina.model.Situation;
 import com.juhokall.telesina.model.Solution;
 import com.juhokall.telesina.model.SolutionType;
-import com.juhokall.telesina.model.core.Telesina;
 import com.juhokall.telesina.model.TelesinaHand;
+import com.juhokall.telesina.model.core.Telesina;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -36,7 +36,7 @@ public class TelesinaGameImpl implements TelesinaGame {
 		Situation nextSituation = s.clone();
 		action.solve(nextSituation, solution);
 		if (nextSituation.getPlayerCount() <= 1) {
-		} else if (nextSituation.getPlayersLeft() <= 0) {
+		} else if (nextSituation.getPlayersLeft() == 0) {
 			nextSituation.moveToNextStreet();
 		} else {
 			setNextPlayer(nextSituation);

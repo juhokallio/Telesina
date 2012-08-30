@@ -29,6 +29,9 @@ public class Raise implements TelesinaGameAction {
 			}
 			player.removeFromStack(betSize);
 			situation.addToPot(betSize);
+			if(situation.getPlayersLeft() == 0) {
+				situation.setPlayersLeft(1);
+			}
 			return true;
 		} else {
 			return false;
