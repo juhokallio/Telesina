@@ -15,7 +15,7 @@ import java.util.Random;
 import java.util.Set;
 
 /**
- *
+ * Class that simulates one hand at a time. The basic implemention.
  * @author juho
  */
 public class HandSimulatorImpl implements HandSimulator {
@@ -24,7 +24,7 @@ public class HandSimulatorImpl implements HandSimulator {
 	private Random random;
 	private TelesinaHandRater rater;
 	private Set playedCards;
-
+	
 	@Inject
 	public HandSimulatorImpl(TelesinaHandRater rater) {
 		this.rater = rater;
@@ -35,7 +35,7 @@ public class HandSimulatorImpl implements HandSimulator {
 		}
 		random = new Random();
 	}
-
+	
 	@Override
 	public void addPlayedCard(int card) {
 		playedCards.add(card);

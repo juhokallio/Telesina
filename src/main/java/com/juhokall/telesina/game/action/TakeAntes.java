@@ -10,7 +10,7 @@ import com.juhokall.telesina.model.Solution;
 import java.util.Map;
 
 /**
- *
+ * Solves the TakeAntes action.
  * @author juho
  */
 public class TakeAntes implements TelesinaGameAction{

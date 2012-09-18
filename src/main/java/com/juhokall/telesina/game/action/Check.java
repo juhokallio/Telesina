@@ -8,7 +8,7 @@ import com.juhokall.telesina.model.Situation;
 import com.juhokall.telesina.model.Solution;
 
 /**
- *
+ *Solves the Check action.
  * @author juho
  */
 public class Check implements TelesinaGameAction{

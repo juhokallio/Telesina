@@ -11,7 +11,7 @@ import java.util.EnumMap;
 import java.util.Map;
 
 /**
- *
+ * TelesinaGameAction implemention that gives the general solution.
  * @author juho
  */
 public class TelesinaGameActionSolver implements TelesinaGameAction {

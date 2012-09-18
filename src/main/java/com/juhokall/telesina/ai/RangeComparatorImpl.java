@@ -5,7 +5,6 @@
 package com.juhokall.telesina.ai;
 
 import com.juhokall.telesina.model.HandRange;
-import java.util.Collections;
 import java.util.List;
 
 /**

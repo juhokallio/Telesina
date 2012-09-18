@@ -30,7 +30,7 @@ public class TelesinaAITest {
 		ai = injector.getInstance(TelesinaAI.class);
 	}
 
-	@Test
+//	@Test
 	public void aiTest1() {
 		Situation situation = new Situation(2, 10);
 		situation.setStreet(2);

@@ -26,10 +26,4 @@ public class TextualHumanizer implements TelesinaHumanizer{
 		return returned;
 	}
 
-	@Override
-	public int dehumanizeCard(String card) {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-	
-	
 }

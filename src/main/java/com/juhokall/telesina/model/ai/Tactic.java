@@ -14,6 +14,10 @@ import com.juhokall.telesina.model.core.Telesina;
 public class Tactic {
 	private int[] actionPercentages;
 
+	/**
+	 *
+	 * @param actionPercentages
+	 */
 	public Tactic(int[] actionPercentages) {
 		this.actionPercentages = new int[Telesina.ACTION_TYPE_COUNT];
 		for(int i = 0; i < Telesina.ACTION_TYPE_COUNT; i++) {
@@ -21,13 +25,24 @@ public class Tactic {
 		}
 	}
 
+	/**
+	 *
+	 */
 	public Tactic() {
 		actionPercentages = new int[Telesina.ACTION_TYPE_COUNT];
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public int[] getActionPercentages() {
 		return actionPercentages;
 	}
+	/**
+	 *
+	 * @return
+	 */
 	@Override
 	public Tactic clone() {
 		Tactic clone = new Tactic();
@@ -39,17 +54,36 @@ public class Tactic {
 		return clone;
 	}
 
+	/**
+	 *
+	 * @param actionPercentages
+	 */
 	public void setActionPercentages(int[] actionPercentages) {
 		this.actionPercentages = actionPercentages;
 	}
 
+	/**
+	 *
+	 * @param action
+	 * @return
+	 */
 	public int getPercentage(SolutionType action) {
 		return actionPercentages[action.getOrderNumber()];
 	}	
 
+	/**
+	 *
+	 * @param action
+	 * @param percentage
+	 */
 	public void setPercentage(SolutionType action, int percentage) {
 		actionPercentages[action.getOrderNumber()] = percentage;
 	}
+	/**
+	 *
+	 * @param nullToHundred
+	 * @return
+	 */
 	public SolutionType getAction(int nullToHundred) {
 		int percentage = 0;
 		for(int i = 0; i < Telesina.ACTION_TYPE_COUNT - 1; i++) {

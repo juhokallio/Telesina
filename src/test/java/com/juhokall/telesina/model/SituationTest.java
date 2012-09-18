@@ -19,7 +19,6 @@ public class SituationTest {
 
 		Situation clone = situation.clone();
 		Assert.assertEquals(situation.getPotSize(), clone.getPotSize());
-		Assert.assertEquals(situation.getActivePlayer().getLastSolution().getSolutionType(), clone.getActivePlayer().getLastSolution().getSolutionType());
 		Assert.assertEquals(situation.getPlayersLeft(), clone.getPlayersLeft());
 		Assert.assertEquals(situation.getStreet(), clone.getStreet());
 	}

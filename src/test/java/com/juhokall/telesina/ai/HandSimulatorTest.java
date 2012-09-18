@@ -26,7 +26,7 @@ public class HandSimulatorTest {
 		handSimulator = injector.getInstance(HandSimulator.class);
 	}
 
-	@Test
+//	@Test
 	public void simulatorTest1() {
 		int[] cards = {0, 8, 1, 9};
 		TelesinaHand hand = new TelesinaHand(cards);

@@ -8,7 +8,7 @@ import com.juhokall.telesina.model.Situation;
 import com.juhokall.telesina.model.Solution;
 
 /**
- *
+ *Solves the Fold action.
  * @author juho
  */
 public class Fold implements TelesinaGameAction {

@@ -17,7 +17,7 @@ import com.juhokall.telesina.model.core.Telesina;
 import java.util.Scanner;
 
 /**
- *
+ * The test arena for the AI.
  * @author juho
  */
 public class TelesinaArena {

@@ -11,7 +11,7 @@ import com.juhokall.telesina.model.SolutionType;
 import com.juhokall.telesina.model.core.Telesina;
 
 /**
- *
+ *Solves the Raise action.
  * @author juho
  */
 public class Raise implements TelesinaGameAction {

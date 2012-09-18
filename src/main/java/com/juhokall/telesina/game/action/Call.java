@@ -10,11 +10,17 @@ import com.juhokall.telesina.model.Solution;
 import com.juhokall.telesina.model.core.Telesina;
 
 /**
- *
+ * Solves the Call action.
  * @author juho
  */
 public class Call implements TelesinaGameAction {
 
+	/**
+	 *
+	 * @param situation
+	 * @param solution
+	 * @return
+	 */
 	@Override
 	public Boolean solve(Situation situation, Solution solution) {
 		int betSize = solution.getSolutionSize();

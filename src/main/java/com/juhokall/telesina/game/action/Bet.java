@@ -10,7 +10,7 @@ import com.juhokall.telesina.model.Solution;
 import com.juhokall.telesina.model.core.Telesina;
 
 /**
- *
+ * Solves the Bet action.
  * @author juho
  */
 public class Bet implements TelesinaGameAction {

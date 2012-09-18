@@ -5,42 +5,53 @@
 package com.juhokall.telesina.model.ai;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
- *
+ * A class that models a strategy. Strategy is an important building block in 
+ * this implementation of poker AI. It represent a way to handle certain
+ * situation.
  * @author juho
  */
 public class Strategy {
 
-	//private Map<Integer, Tactic> tactics;
-	private ArrayList<Tactic> tacticss;
+	private ArrayList<Tactic> tactics;
 	private int estimatedValue;
 
-//	public Strategy(Map<Integer, Tactic> tactics) {
-//		this.tactics = tactics;
-//	}
-	
-	public Strategy(ArrayList<Tactic> tacticss) {
-		this.tacticss = tacticss; 
+	/**
+	 * Constructor
+	 * @param tactics Tactics to give for this strategy.
+	 */
+	public Strategy(ArrayList<Tactic> tactics) {
+		this.tactics = tactics; 
 	}
 	
+	/**
+	 * Constructor that copies an existing strategy
+	 * @param strategy Strategy that will be copied
+	 */
 	public Strategy(Strategy strategy) {
 		if (strategy != null) {
-			tacticss = new ArrayList<Tactic> ();
+			tactics = new ArrayList<Tactic> ();
 			List<Tactic> sourceTactics = strategy.getTactics();
 			for (Tactic tactic : sourceTactics) {
-				tacticss.add(tactic.clone());
+				tactics.add(tactic.clone());
 			}
 		}
 	}
 
+	/**
+	 * Constructor
+	 */
 	public Strategy() {
-		tacticss = new ArrayList<Tactic> ();
+		tactics = new ArrayList<Tactic> ();
 	}
 
+	/**
+	 * Gives the tactic that fits the given percentage.
+	 * @param zeroToHundred A percentage point from the strategy. 0-100.
+	 * @return Tactic that fits the percentage point.
+	 */
 	public Tactic getTactic(int zeroToHundred) {
 		int closestBreakpoint = -1;
 		int breakpoint;
@@ -51,34 +62,44 @@ public class Strategy {
 			}
 		}
 		if (closestBreakpoint != -1) {
-			return tacticss.get(closestBreakpoint);
+			return tactics.get(closestBreakpoint);
 		} else {
 			System.out.println("The strategy was empty and returned an empty tactic.");
 			return new Tactic();
 		}
 	}
 
+	/**
+	 * Gets all the tactics the strategy has.
+	 * @return The strategy's tactis.
+	 */
 	public List<Tactic> getTactics() {
-		return tacticss;
+		return tactics;
 	}
 
+	/**
+	 * Puts a tactic to the strategy.
+	 * @param tactic Tactic to be put.
+	 */
 	public void putNewTactic(Tactic tactic) {
 		List<Tactic> o = getTactics();
 	
-		tacticss.add(tactic);
+		tactics.add(tactic);
 		int i=0;
 	}
-//	public void putNewTactic(int breakpoint, Tactic tactic) {
-//		int[] actionPercentages = {20,20,20,20,20};	
-//		this.tactics.put(breakpoint, new Tactic(actionPercentages));
-//		Map ts = tactics;
-//		int i = 0;
-//	}
 
+	/**
+	 *	Gets the estimated value of this strategy.
+	 * @return Integer representation of the estimated value.
+	 */
 	public int getEstimatedValue() {
 		return estimatedValue;
 	}
 
+	/**
+	 *	Sets the estimated value of this strategy.
+	 * @param estimatedValue Integer representation of the estimated value.
+	 */
 	public void setEstimatedValue(int estimatedValue) {
 		this.estimatedValue = estimatedValue;
 	}
